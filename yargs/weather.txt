@@ -1,0 +1,4 @@
+fc962ba7307b2bded17010e6c278049c
+
+
+http://api.weatherstack.com/current?access_key=fc962ba7307b2bded17010e6c278049c&query=fetch:ip

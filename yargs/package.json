@@ -1,0 +1,19 @@
+{
+  "name": "pirates",
+  "version": "1.0.0",
+  "description": "playground for learning node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yargs",
+    "nodejs"
+  ],
+  "author": "Haddee Ann",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "yargs": "^17.3.1"
+  }
+}
