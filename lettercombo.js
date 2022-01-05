@@ -4,27 +4,41 @@
  */
 function play () {
     let nodeArr = [];
+    let letterArr = ['a', 'b', 'c'];
     let arr = ['d', 'e', 'f'];
     let arr2 = ['g', 'h', 'i'];
+    let arr3 = ['j', 'k', 'l'];
 
-    addStrArr(arr, arr2);
+    addStrArr(letterArr, arr, arr2, arr3);
     // console.log(nodeArr);
 }
 
 // add two rows and put results in a results array
-function addStrArr(rowArr, rowArr2) {
+function addStrArr(letterArr, rowArr1, rowArr2, rowArr3) {
     let adderArr = [];
-    let letter = 'a';
+    let letterBase = letterArr[0];
 
-    rowAdder(rowArr, letter);
+    // pattern building
+    // step one
+    rowAdder(rowArr1, letterBase);
 
-    let adderArrSlice = adderArr.slice();
+    // step two
+    let arrSlice = adderArr.slice();
 
-    while(adderArrSlice.length > 0) {
-        let newLetterCombo = adderArrSlice.shift();
-        console.log(newLetterCombo);
-        let rowArr = rowArr2.slice();
-        rowAdder(rowArr, newLetterCombo);
+    while(arrSlice.length > 0) {
+        let letterBase = arrSlice.shift();
+        // call to the row adder
+        let rowArrSlice = rowArr2.slice();
+        rowAdder(rowArrSlice, letterBase);
+    }
+
+    arrSlice = adderArr.slice();
+
+    while(arrSlice.length > 0) {
+        let letterBase = arrSlice.shift();
+        // call to the row adder
+        let rowArrSlice = rowArr3.slice();
+        rowAdder(rowArrSlice, letterBase);
     }
 
     function rowAdder (rowArr, prevLetter) {
