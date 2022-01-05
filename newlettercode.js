@@ -1,4 +1,10 @@
 function loopThruArr(damnArray) {
+    const addArr = searchAdd(damnArray);
+
+    console.log(addArr);
+}
+
+function searchAdd(damnArray) {
     let start = 'a';
     let addArr = [];
 
@@ -26,7 +32,7 @@ function loopThruArr(damnArray) {
         addArr.push(combo);
     }
 
-    console.log(addArr);
+    return addArr;
 }
 
-loopThruArr([['d', 'e', 'f'], ['g', 'h', 'i'], ['j', 'k', 'l']]);
+loopThruArr([['at', 'b', 'c'], ['d', 'e', 'f']]);
