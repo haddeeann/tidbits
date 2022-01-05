@@ -25,7 +25,6 @@ function addStrArr(letterArr, rowArr1, rowArr2, rowArr3) {
 
     while(addingThatDamnArray.length > 0) {
         let rowArray = addingThatDamnArray.shift();
-        console.log(rowArray);
         let arrSlice = adderArr.slice();
 
         while(arrSlice.length > 0) {
@@ -35,25 +34,6 @@ function addStrArr(letterArr, rowArr1, rowArr2, rowArr3) {
             rowAdder(rowArrSlice, letterBase);
         }
     }
-
-    // step two
-    // let arrSlice = adderArr.slice();
-
-    // while(arrSlice.length > 0) {
-    //     let letterBase = arrSlice.shift();
-    //     // call to the row adder
-    //     let rowArrSlice = rowArr2.slice();
-    //     rowAdder(rowArrSlice, letterBase);
-    // }
-
-    // arrSlice = adderArr.slice();
-
-    // while(arrSlice.length > 0) {
-    //     let letterBase = arrSlice.shift();
-    //     // call to the row adder
-    //     let rowArrSlice = rowArr3.slice();
-    //     rowAdder(rowArrSlice, letterBase);
-    // }
 
     function rowAdder (rowArr, prevLetter) {
         while(rowArr.length > 0) {
