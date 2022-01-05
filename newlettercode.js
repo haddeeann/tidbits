@@ -1,11 +1,19 @@
-function loopThruArr(damnArray) {
-    const addArr = searchAdd(damnArray);
+function loopThruArr(entryArray) {
+    let entryArrayCopy = [];
+    let startRow = entryArray.shift();
+    let resultArr = [];
+    let answerArr = [];
 
-    console.log(addArr);
+    for(let startVal of startRow) {
+        entryArrayCopy = entryArray.slice();
+        resultArr = searchAdd(entryArrayCopy, startVal);
+        answerArr = [...answerArr, ...resultArr];
+    }
+
+    console.log(answerArr);
 }
 
-function searchAdd(damnArray) {
-    let start = 'a';
+function searchAdd(damnArray, start) {
     let addArr = [];
 
     while(damnArray.length > 0) {
@@ -35,4 +43,4 @@ function searchAdd(damnArray) {
     return addArr;
 }
 
-loopThruArr([['at', 'b', 'c'], ['d', 'e', 'f']]);
+loopThruArr([['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']]);
