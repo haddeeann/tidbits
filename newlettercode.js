@@ -1,8 +1,30 @@
+var letterCombinations = function(digits) {
+    let digitArr = [];
+    const letterD = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z']
+    }
+    for(let i of digits) {
+        digitArr.push(letterD[i]);
+    }
+
+    return loopThruArr(digitArr);
+};
+
 function loopThruArr(entryArray) {
     let entryArrayCopy = [];
     let startRow = entryArray.shift();
     let resultArr = [];
     let answerArr = [];
+    if(entryArray.length === 0) {
+        return startRow;
+    }
 
     for(let startVal of startRow) {
         entryArrayCopy = entryArray.slice();
@@ -10,7 +32,7 @@ function loopThruArr(entryArray) {
         answerArr = [...answerArr, ...resultArr];
     }
 
-    console.log(answerArr);
+    return answerArr;
 }
 
 function searchAdd(damnArray, start) {
@@ -43,4 +65,6 @@ function searchAdd(damnArray, start) {
     return addArr;
 }
 
-loopThruArr([['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']]);
+letterCombinations('78');
+
+//loopThruArr([['a', 'b', 'c']]);
