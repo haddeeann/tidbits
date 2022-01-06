@@ -1,4 +1,7 @@
 var letterCombinations = function(digits) {
+    if(digits === '' || digits.length === 0) {
+        return [];
+    }
     let digitArr = [];
     const letterD = {
         '2': ['a', 'b', 'c'],
@@ -14,10 +17,10 @@ var letterCombinations = function(digits) {
         digitArr.push(letterD[i]);
     }
 
-    return loopThruArr(digitArr);
+    return loopThruArr(digitArr, digits.length);
 };
 
-function loopThruArr(entryArray) {
+function loopThruArr(entryArray, digitsLength) {
     let entryArrayCopy = [];
     let startRow = entryArray.shift();
     let resultArr = [];
@@ -28,16 +31,16 @@ function loopThruArr(entryArray) {
 
     for(let startVal of startRow) {
         entryArrayCopy = entryArray.slice();
-        resultArr = searchAdd(entryArrayCopy, startVal);
+        resultArr = searchAdd(entryArrayCopy, startVal, digitsLength);
         answerArr = [...answerArr, ...resultArr];
     }
 
     return answerArr;
 }
 
-function searchAdd(damnArray, start) {
+function searchAdd(damnArray, start, digitsLength) {
     let addArr = [];
-
+    let resultsArr = [];
     while(damnArray.length > 0) {
         let nextRow = damnArray.shift();
         if(addArr.length === 0) {
@@ -46,25 +49,24 @@ function searchAdd(damnArray, start) {
             }
             continue;
         }
- 
+
         let baseLetters = nextRow.slice(); // copy of next row so row isn't affected
         let addRowArr = addArr.slice(); // get copy of the current contents of the add array 
         while(baseLetters.length > 0) {
             let nextLetter = baseLetters.shift();
             for(let letters of addRowArr) {
-                addLetters(letters, nextLetter);
+                let combo = letters + nextLetter;
+                addArr.push(combo);
+                if(combo.length === digitsLength) {
+                    resultsArr.push(combo);
+                }
             }
         }
     }
 
-    function addLetters(addLetters, letter) {
-        let combo = addLetters + letter;
-        addArr.push(combo);
-    }
-
-    return addArr;
+    return resultsArr.length > 0 ? resultsArr : addArr;
 }
 
-letterCombinations('78');
+letterCombinations('2345');
 
 //loopThruArr([['a', 'b', 'c']]);
