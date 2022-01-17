@@ -1,23 +1,23 @@
 var fourSum = function(nums, target) {
     let sorted = mergeSort(nums);
-    console.log(sorted);
-    // pivot points
-    let mid = Math.floor(sorted.length/2); // midpoint
-    let first = Math.floor(mid/2); // first quarter
-    let end = sorted.length - 1; // end point
-    let second = Math.floor(((end - mid) / 2) + mid);
-    console.log(sorted[0]);
-    console.log(sorted[first]);
-    console.log(sorted[mid]);
-    console.log(sorted[second]);
-    console.log(sorted[end]);
-    // for(let i = 0; i <= pivot; i++) {
-    //     console.log(`start ${sorted[i]}`);
-    //     console.log(`first ${sorted[first]}`);
-    //     console.log(`middle ${sorted[pivot]}`);
-    //     console.log(`end ${sorted[end - i]}`);
-    //     console.log('--------');
-    // }
+    let start = null;
+    let q1 = null;
+    let mid = null;
+    let q2 = null;
+    let end = null;
+
+    while(sorted.length > 0) {
+        // pivot points
+        start = 0;
+        mid = Math.floor(sorted.length/2); // midpoint
+        q1 = Math.floor(mid/2); // first quarter
+        q2 = Math.floor(q1 + mid); // q2
+        end = sorted.length - 1; // end point
+        console.log(`${sorted[start]} + ${sorted[q1]} + ${sorted[mid]} + ${sorted[q2]} + ${sorted[end]}`)
+        sum = sorted[start] + sorted[q1] + sorted[mid] + sorted[q2] + sorted[end];
+        console.log(`sum is ${sum}`);
+        sorted.shift();
+    }
 };
 
 function mergeSort(arr) {
@@ -47,4 +47,4 @@ function sort(left, right) {
 }
 
 //fourSum([1,0,-1,0,-2,2], 0);
-fourSum([1,10,-3,6,-2,2,4,4,3,-5], 0);
+fourSum([-3, -2, -1, 0, 0, 1, 2, 3], 0);
