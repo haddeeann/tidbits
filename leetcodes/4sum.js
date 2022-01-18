@@ -1,11 +1,20 @@
 var fourSum = function(nums, target) {
-    let sum = null;
+    // let sum = null;
     console.log(nums);
 
     for(let r = 3; r < nums.length; r++) {
-        console.log(nums[0], nums[1], nums[2], nums[r])
-        sum = nums[0] + nums[1] + nums[2] + nums[r];
-        console.log(sum);
+        let u = 0;
+        let t = 1;
+        let s = 2;
+        while(r - s > 1) {
+            s++;
+            while(s - t > 1) {
+                t++;
+                while(t - u > 1) {
+                    u++;
+                }
+            }
+        }
     }
 };
 
