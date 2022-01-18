@@ -1,22 +1,11 @@
 var fourSum = function(nums, target) {
-    let sorted = mergeSort(nums);
-    let start = null;
-    let q1 = null;
-    let mid = null;
-    let q2 = null;
-    let end = null;
+    let sum = null;
+    console.log(nums);
 
-    while(sorted.length > 0) {
-        // pivot points
-        start = 0;
-        mid = Math.floor(sorted.length/2); // midpoint
-        q1 = Math.floor(mid/2); // first quarter
-        q2 = Math.floor(q1 + mid); // q2
-        end = sorted.length - 1; // end point
-        console.log(`${sorted[start]} + ${sorted[q1]} + ${sorted[mid]} + ${sorted[q2]} + ${sorted[end]}`)
-        sum = sorted[start] + sorted[q1] + sorted[mid] + sorted[q2] + sorted[end];
-        console.log(`sum is ${sum}`);
-        sorted.shift();
+    for(let r = 3; r < nums.length; r++) {
+        console.log(nums[0], nums[1], nums[2], nums[r])
+        sum = nums[0] + nums[1] + nums[2] + nums[r];
+        console.log(sum);
     }
 };
 
@@ -47,4 +36,5 @@ function sort(left, right) {
 }
 
 //fourSum([1,0,-1,0,-2,2], 0);
-fourSum([-3, -2, -1, 0, 0, 1, 2, 3], 0);
+fourSum([-4, -3, -2, -1, 0, 0, 1, 2, 3, 4], 0);
+
