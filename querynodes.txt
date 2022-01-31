@@ -1,6 +1,0 @@
-function query(element) {
-    document.querySelectorAll(element).forEach(function(node) {
-        // Do whatever you want with the node object.
-        console.log(node);
-    });
-}
