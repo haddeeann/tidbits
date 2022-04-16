@@ -7,10 +7,6 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        pal = s[0]
-        longest = 1
-        s_len = len(s)
-
         def testPalindrome(p):
             if len(p) % 2 == 0:
                 # abcd
@@ -30,42 +26,64 @@ class Solution(object):
 
             return True
 
+        def testSubstrings(search_word, longest_word):
+            pal = ""
+
+            # j = 0
+            # k = 2
+            # # test three letters aka single core
+            # for letter_sw in search_word[1:]:
+            #     while j >= 0 and k < sw_l:
+            #         word = s[j] + letter_sw + s[k]
+            #         if len(word) > longest_word:
+            #             if testPalindrome(word):
+            #                 longest_word = len(word)
+            #                 pal = word
+            #         j -= 1
+            #         k += 1
+
+            # test four letters aka double core
+            if len(search_word) > 3:
+                for i_index, letter_sw in search_word[2:]:
+                    if search_word[i_index - 1] == letter_sw:
+                        word = search_word[i_index - 1] + letter_sw
+                        if len(word) > longest_word:
+                            longest_word = len(word)
+                            pal = word
+                        j_index = i_index - 2
+                        k_index = i_index + 1
+                        while j_index >= 0 and k_index < len(search_word):
+                            word = search_word[j_index] + word + search_word[k_index]
+                            if len(word) > longest_word:
+                                if testPalindrome(word):
+                                    longest_word = len(word)
+                                    pal = word
+                            j_index -= 1
+                            k_index += 1
+
+            return pal
+
+        longest = 0
+        long_pal = s[0]
         for i, letter in enumerate(s):
-            j = i - 1
-            k = i + 1
-            word = s[i]
-            while j >= 0 and k < s_len:
-                word = s[j] + word + s[k]
-                if testPalindrome(word) and len(word) > longest:
-                    longest = len(word)
-                    pal = word
-                j -= 1
-                k += 1
-
-            if i > 0:
-                j = i - 2
-                k = i + 1
-                word = s[i-1] + s[i]
+            # find longest possible substring
+            end_index = len(s) - 1
+            if i != end_index:
+                right_length = end_index - i
+                left_length = i
+                length = right_length if right_length < left_length else left_length
+                substring = s[i - length: i + length + 1]
             else:
-                j = i - 1
-                k = i + 1
-                word = s[i]
+                substring = s[end_index - 1] + s[end_index]
+            if len(substring) > longest:
+                palindrome = testSubstrings(substring, longest)
+            if len(palindrome) > longest:
+                longest = len(palindrome)
+                long_pal = palindrome
 
-            if testPalindrome(word) and len(word) > longest:
-                longest = len(word)
-                pal = word
-            while j >= 0 and k < s_len:
-                word = s[j] + word + s[k]
-                if testPalindrome(word) and len(word) > longest:
-                    longest = len(word)
-                    pal = word
-                j -= 1
-                k += 1
-
-        return pal
+        print(long_pal)
 
 
 sol = Solution()
-sol.longestPalindrome(
-    "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa")
+sol.longestPalindrome("abba")
 # print(sol.longestPalindrome("azwdzwmwcqzgcobeeiphemqbjtxzwkhiqpbrprocbppbxrnsxnwgikiaqutwpftbiinlnpyqstkiqzbggcsdzzjbrkfmhgtnbujzszxsycmvipjtktpebaafycngqasbbhxaeawwmkjcziybxowkaibqnndcjbsoehtamhspnidjylyisiaewmypfyiqtwlmejkpzlieolfdjnxntonnzfgcqlcfpoxcwqctalwrgwhvqvtrpwemxhirpgizjffqgntsmvzldpjfijdncexbwtxnmbnoykxshkqbounzrewkpqjxocvaufnhunsmsazgibxedtopnccriwcfzeomsrrangufkjfzipkmwfbmkarnyyrgdsooosgqlkzvorrrsaveuoxjeajvbdpgxlcrtqomliphnlehgrzgwujogxteyulphhuhwyoyvcxqatfkboahfqhjgujcaapoyqtsdqfwnijlkknuralezqmcryvkankszmzpgqutojoyzsnyfwsyeqqzrlhzbc"))
