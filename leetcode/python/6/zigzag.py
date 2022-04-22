@@ -1,49 +1,66 @@
 class Solution(object):
+    def fill(self, numRows, arr):
+        col = len(arr)
+        arr.append([])
+        for x in range(numRows):
+            arr[col].append('')
+
     def convert(self, s, numRows):
         """
         :type s: str
         :type numRows: int
         :rtype: str
         """
+        # set up once
         arr = []
-        arr.append([])
-        for x in range(numRows):
-            arr[0].append('')
-        arr[0][0] = s[0]
-        arr[0][1] = s[1]
-        arr[0][2] = s[2]
-        arr[0][3] = s[3]
-        arr[0][4] = s[4]
+        z = 0
 
-        arr.append([])
-        for x in range(numRows):
-            arr[1].append('')
-        arr[1][3] = s[5]
+        # pattern one
+        self.fill(numRows, arr)
+        y = 0
+        while y < numRows:
+            arr[0][y] = s[z]
+            y += 1
+            z += 1
 
-        arr.append([])
-        for x in range(numRows):
-            arr[2].append('')
-        arr[2][2] = s[6]
+        # pattern two
+        i = 1
+        j = 3
+        while j > 0:
+            self.fill(numRows, arr)
+            arr[i][j] = s[z]
+            i += 1
+            j -= 1
+            z += 1
 
-        arr.append([])
-        for x in range(numRows):
-            arr[3].append('')
-        arr[3][1] = s[7]
+        # pattern one
+        self.fill(numRows, arr)
+        y = 0
+        while y < numRows:
+            arr[4][y] = s[z]
+            y += 1
+            z += 1
 
-        arr.append([])
-        for x in range(numRows):
-            arr[4].append('')
-        arr[4][0] = s[8]
-        arr[4][1] = s[9]
-        arr[4][2] = s[10]
-        arr[4][3] = s[11]
-        arr[4][4] = s[12]
+        # pattern two
+        i = 5
+        j = 3
+        while j > 0:
+            self.fill(numRows, arr)
+            arr[i][j] = s[z]
+            i += 1
+            j -= 1
+            z += 1
 
-        arr.append([])
-        for x in range(numRows):
-            arr[5].append('')
+        # pattern one
+        self.fill(numRows, arr)
+        y = 0
+        while y < numRows:
+            arr[8][y] = s[z]
+            y += 1
+            z += 1
+
         print(arr)
 
 
 sol = Solution()
-sol.convert("stringsaregoodandtheyarelong", 5)
+sol.convert("stringsaregoodandtheyarelongstringsaregoodandtheyarelong", 5)
