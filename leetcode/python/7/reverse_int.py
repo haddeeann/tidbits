@@ -4,20 +4,26 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        random_a = 4
-        random_b = 5
-        add_3 = random_a & random_b
-        # lower_limit = -(2 ** 31)
-        # upper_limit = (2 ** 31) - 1
-        print("{0:b}".format(random_a))
-        print("{0:b}".format(random_b))
-        print("{0:b}".format(add_3))
+        str_x = str(x)
+        rev_ans = 0
+        hex_lower = -0x80000000
+        hex_upper = 0x7fffffff
 
-        if add_3 == random_a and add_3 == random_b:
-            print("same")
+        if x < 0:
+            rev_str_x = "-" + str_x[:0:-1]
+            rev_int = int(rev_str_x)
         else:
-            print(add_3)
+            rev_str_x = str_x[::-1]
+            rev_int = int(rev_str_x)
+
+        if x >= 0:
+            if rev_int == rev_int & hex_upper:
+                rev_ans = rev_int
+        else:
+            if hex_lower == rev_int & hex_lower:
+                rev_ans = rev_int
+        return rev_ans
 
 
 sol = Solution()
-sol.reverse(123)
+sol.reverse(-123)
