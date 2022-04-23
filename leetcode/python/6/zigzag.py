@@ -23,23 +23,27 @@ class Solution(object):
             self.fill(numRows, arr)
             y = 0
             while y < numRows:
+                if z == s_length:
+                    break
                 arr[i][y] = s[z]
                 y += 1
                 z += 1
 
             # pattern two
             i += 1
-            j = 3
+            j = numRows - 2
             while j > 0:
+                if z == s_length:
+                    break
                 self.fill(numRows, arr)
                 arr[i][j] = s[z]
                 i += 1
                 j -= 1
                 z += 1
 
-        for index, a in enumerate(arr):
-            print(a)
+        word = ''
+        return word
 
 
 sol = Solution()
-sol.convert("stringsaregoodandtheyarelongstringsaregoodandtheyarelong", 5)
+sol.convert("PAYPALISHIRING", 3)
