@@ -41,8 +41,17 @@ class Solution(object):
                 j -= 1
                 z += 1
 
-        word = ''
-        return word
+        row = 0
+        build_string = ''
+        while row < numRows:
+            col = 0
+            while col < len(arr):
+                if arr[col][row] != '':
+                    build_string += arr[col][row]
+                col += 1
+            row += 1
+
+        return build_string
 
 
 sol = Solution()
