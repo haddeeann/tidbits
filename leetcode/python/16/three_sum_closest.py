@@ -10,6 +10,7 @@ class Solution(object):
         test_diff = 0
         nums.sort()
 
+        # comment goes here
         for l_index, left in enumerate(nums[:-3]):
             r_index = len(nums) - 1
             m_index = l_index + 1
