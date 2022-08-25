@@ -8,32 +8,38 @@ class Solution(object):
         """
         nums.sort()
         print(nums)
-        if target < 0:
-            left = 0
-            middle = 1
-            right = 2
-            # first value
-            sum = nums[left] + nums[middle] + nums[right]
-            diff = abs(target - sum)
-            if target < sum:
-                return sum
+        print(target)
+        not_found = True
+        left = 0
+        middle = 1
+        right = 2
+        # first value
+        sum = nums[left] + nums[middle] + nums[right]
+        diff = abs(target - sum)
+        if target < sum:
+            return sum
+
+        while not_found:
             # test value
-            sum_test = nums[left] + nums[middle] + nums[right+1]
+            right += 1
+            sum_test = nums[left] + nums[middle] + nums[right]
             test_diff = abs(target-sum_test)
+
             # if we get further away
-            if diff < test_diff:
+            if diff < test_diff or sum_test == target:
+                print(sum)
+                print('-----')
                 return sum
 
-            while diff > test_diff:
-                diff = test_diff
-                right += 1
-                sum_test = nums[left] + nums[middle] + nums[right]
-                test_diff = abs(target - sum_test)
+            middle += 1
+            sum_test = nums[left] + nums[middle] + nums[right]
+            test_diff = abs(target - sum_test)
 
-            while diff > test_diff:
-                middle += 1
-                sum_test = nums[left] + nums[middle] + nums[right]
-                test_diff = abs(target - sum_test)
+            # if we get further away
+            if diff < test_diff or sum_test == target:
+                print(sum)
+                print('-----')
+                return sum
 
 
 sol = Solution()
@@ -141,6 +147,8 @@ if target < 0:
          857, 70, 590, -4, 610, -151, 196, -981, 385, -689, -617, 827, 360, -959, -289, 620, 933, -522, 597, -667, -882,
          524, 181, -854, 275, -600, 453, -942, 134], -2805)
     # -3859
+
+if False:
     sol.threeSumClosest(
         [-226, -233, 171, -956, 62, 550, 447, -440, 834, -251, -753, -741, 789, -712, -688, -949, 617, 454, -201, 86,
          -537, 900, 868, 98, -258, -330, 606, 459, 118, 424, 925, -924, 39, 539, 492, -738, -461, 19, -945, 601, 395,

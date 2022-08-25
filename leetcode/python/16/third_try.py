@@ -1,64 +1,35 @@
 import math
 class Solution(object):
     def threeSumClosest(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        least_diff = None
-        test_diff = 0
         nums.sort()
-        print(nums)
-        sum = 0
-        least_sum = 0
+        l_index = 0
+        left = nums[l_index]
+        least_diff = None
+        least_sum = None
+        print('length: ', len(nums))
         print(target)
-        if len(nums) <= 3:
-            for num in nums:
-                sum += num
-            return sum
-        if target < 0:
-            sum = nums[0] + nums[1] + nums[2]
-            diff = abs(target - sum)
-            sum_test = nums[0] + nums[1] + nums[3]
-            test_diff = abs(target - sum_test)
-            if diff < test_diff or target < sum:
-                return sum
-        elif target > 0:
-            right = len(nums) - 1
-            middle = right - 1
-            left = middle - 1
-            sum = nums[left] + nums[middle] + nums[right]
-            diff = abs(target - sum)
-            sum_test = nums[left] + nums[middle] + nums[right]
-            test_diff = abs(target - sum_test)
-            if diff < test_diff or target > sum:
-                return sum
+        print(nums)
 
-        # comment goes here
-        for l_index, left in enumerate(nums[:-2]):
-            r_index = len(nums) - 1
-            m_index = l_index + 1
+        r_index = len(nums) - 1
+        m_index = l_index + 1
 
-            while m_index < r_index:
-                right = nums[r_index]
-                middle = nums[m_index]
-                sum = left + middle + right
-                test_diff = abs(sum - target)
-                if least_diff is None or test_diff < least_diff:
-                    least_diff = test_diff
-                    least_sum = sum
+        while m_index < r_index:
+            right = nums[r_index]
+            middle = nums[m_index]
+            sum = left + middle + right
+            test_diff = abs(sum - target)
+            if least_diff is None or test_diff < least_diff:
+                least_diff = test_diff
+                least_sum = sum
 
-                if sum > target:
-                    # if sum is too big, move right to be decrease
-                    r_index -= 1
-                elif sum < target:
-                    # if sum too small, move middle index to increase
-                    m_index += 1
-                elif sum == target:
-                    print(l_index, m_index, r_index)
-                    print(target)
-                    return target
+            if sum > target:
+                r_index -= 1
+            elif sum < target:
+                m_index += 1
+            elif sum == target:
+                print(l_index, m_index, r_index)
+                print(target)
+                return target
         print(l_index, m_index, r_index)
         print(least_sum)
         return least_sum
