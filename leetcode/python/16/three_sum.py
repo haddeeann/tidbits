@@ -39,12 +39,20 @@ class Solution(object):
 
 sol = Solution()
 # set one, inputs
+[0,1,2]
+3
 test_set = [
     {
         "n": 1,
         "answer": 2,
         "arr": [-1,2,1,-4],
         "t": 1
+    },
+    {
+        "n": 2,
+        "answer": 3,
+        "arr": [0, 1 ,2],
+        "t": 3
     }
 ]
 
