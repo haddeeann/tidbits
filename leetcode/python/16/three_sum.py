@@ -6,7 +6,7 @@ class Solution(object):
         :rtype: int
         """
         nums.sort()
-        print('nums: ', nums)
+        print('starting array: ', nums)
         for l_index, left in enumerate(nums[:-2]):
             sums_arr = []
             m_index = l_index + 1
@@ -33,26 +33,34 @@ class Solution(object):
                     # move middle index
                     m_index += 1
                     middle = nums[m_index]
+                elif sum == target:
+                    return sum
             print(sums_arr)
         return least_sum
 
 
 sol = Solution()
-# set one, inputs
-[0,1,2]
-3
+
+test_backup = [
+    {
+        "n": 2,
+        "answer": 3,
+        "arr": [0, 1, 2],
+        "t": 3
+    },
+    {
+        "n": 3,
+        "answer": 4,
+        "arr": [0, 1, 3],
+        "t": 3
+    }]
+# inputs
 test_set = [
     {
         "n": 1,
         "answer": 2,
-        "arr": [-1,2,1,-4],
+        "arr": [-1, 2, 1, -4],
         "t": 1
-    },
-    {
-        "n": 2,
-        "answer": 3,
-        "arr": [0, 1 ,2],
-        "t": 3
     }
 ]
 
