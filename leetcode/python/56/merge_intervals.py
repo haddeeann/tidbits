@@ -6,42 +6,44 @@ class Solution(object):
         """
         result_list = []
         overlap = None
+        count = 0
 
         def sort_intervals(e):
             return e[0]
 
         intervals.sort(key=sort_intervals)
 
-        def test_small(small_arr, t_1, t_2):
-            overlap_test = False
-            first_small = small_arr[0]
-            second_small = small_arr[1]
-            if first_small <= t_1 <= second_small:
-                overlap_test = True
-            if first_small <= t_2 <= second_small:
-                overlap_test = True
+        def test_overlap(left_arr, test_arr):
+            return left_arr[0] <= test_arr[0] <= left_arr[1] or left_arr[0] <= test_arr[1] <= left_arr[1]
 
-            return overlap_test
+        def make_overlap(left, right):
+            # add the correct overlap
+            small_left = min(left[0], right[0])
+            large_right = max(left[1], right[1])
+            result_list.append([small_left, large_right])
 
-        for i, small in enumerate(intervals):
+        def change_overlap(index, right):
+            left = result_list[index]
+            # fix the correct overlap
+            small_left = min(left[0], right[0])
+            large_right = max(left[1], right[1])
+            result_list[index] = [small_left, large_right]
+
+        for i, left_arr in enumerate(intervals):
             if overlap:
                 overlap = False
                 continue
-            if i == len(intervals) - 1:
-                # if last one then just add, if we haven't skipped last due to overlap
-                result_list.append(small)
-            else:
-                next_small = intervals[i+1]
+            if i != len(intervals) - 1:
                 # test overlap
-                overlap = test_small(small, next_small[0], next_small[1])
+                overlap = test_overlap(left_arr, intervals[i+1])
                 if overlap:
-                    # add the correct overlap
-                    smallest_left = min(small[0], next_small[0])
-                    largest_right = max(small[1], next_small[1])
-                    result_list.append([smallest_left, largest_right])
+                    make_overlap(left_arr, intervals[i+1])
                 else:
-                    result_list.append(small)
-        print(result_list)
+                    result_list.append(left_arr)
+            else:
+                for i, arr in enumerate(result_list):
+                    if test_overlap(arr, left_arr):
+                        change_overlap(i, left_arr)
         return result_list
 
 
@@ -61,13 +63,23 @@ backup_tests = [
         "no": "third",
         "interval": [[1, 4], [0, 4]],
         "answer": [[0, 4]]
+    },
+    {
+        "no": "fourth",
+        "interval": [[1, 4], [0, 5]],
+        "answer": [[0, 5]]
+    },
+    {
+        "no": "fifth",
+        "interval": [[1, 4], [0, 2], [3, 5]],
+        "answer": [[0, 5]]
     }
 ]
 test_set = [
     {
-        "no": "fourth",
-        "interval": [[1,4],[0,5]],
-        "answer": [[0,5]]
+        "no": "sixth",
+        "interval": [[1,3],[2,6],[8,10],[15,18]],
+        "answer": [[1,6],[8,10],[15,18]]
     }
 ]
 
