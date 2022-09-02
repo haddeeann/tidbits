@@ -5,16 +5,14 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         result_list = []
-        overlap = None
-        count = 0
 
         def sort_intervals(e):
             return e[0]
 
         intervals.sort(key=sort_intervals)
 
-        def test_overlap(left_arr, test_arr):
-            return left_arr[0] <= test_arr[0] <= left_arr[1] or left_arr[0] <= test_arr[1] <= left_arr[1]
+        def test_overlap(left, test_arr):
+            return left[0] <= test_arr[0] <= left[1] or left[0] <= test_arr[1] <= left[1]
 
         def make_overlap(left, right):
             # add the correct overlap
@@ -22,31 +20,20 @@ class Solution(object):
             large_right = max(left[1], right[1])
             result_list.append([small_left, large_right])
 
-        def change_overlap(index, right):
-            left = result_list[index]
+        def change_overlap(left, right):
             # fix the correct overlap
             small_left = min(left[0], right[0])
             large_right = max(left[1], right[1])
             result_list[index] = [small_left, large_right]
 
-        for i, left_arr in enumerate(intervals):
-            if overlap:
-                overlap = False
-                continue
-            if i != len(intervals) - 1:
-                # test overlap
-                overlap = test_overlap(left_arr, intervals[i+1])
-                if overlap:
-                    make_overlap(left_arr, intervals[i+1])
-                else:
-                    result_list.append(left_arr)
-            else:
-                for i, arr in enumerate(result_list):
-                    overlap = test_overlap(arr, left_arr)
-                    if overlap:
-                        change_overlap(i, left_arr)
-                if not overlap:
-                    result_list.append(left_arr)
+        for i, right_arr in enumerate(intervals[1:], start=1):
+            left_arr = intervals[i-1]
+            last_result = len(result_list) - 1
+            if test_overlap(left_arr, right_arr):
+                make_overlap(left_arr, right_arr)
+            elif len(result_list) > 0 and test_overlap(result_list[last_result], right_arr):
+                change_overlap(result_list[last_result], right_arr)
+
         return result_list
 
 
@@ -92,8 +79,8 @@ test_set = [
     }
 ]
 
-[[1, 3], [2, 6], [8, 10], [15, 18]]
-[[1, 6], [8, 10], [15, 18]]
+# [[1, 3], [2, 6], [8, 10], [15, 18]]
+# [[1, 6], [8, 10], [15, 18]]
 
 for test in test_set:
     result = sol.merge(test['interval'])
