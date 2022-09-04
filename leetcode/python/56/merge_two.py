@@ -5,8 +5,6 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         result_list = []
-        last_result = None
-        add_single = True
 
         def sort_intervals(e):
             return e[0]
@@ -16,50 +14,28 @@ class Solution(object):
         def test_overlap(left, test_arr):
             return left[0] <= test_arr[0] <= left[1] or left[0] <= test_arr[1] <= left[1]
 
-        def make_overlap(left, right):
-            # add the correct overlap
-            small_left = min(left[0], right[0])
-            large_right = max(left[1], right[1])
-            result_list.append([small_left, large_right])
-
         def change_overlap(index, left, right):
             # fix the correct overlap
             small_left = min(left[0], right[0])
             large_right = max(left[1], right[1])
             result_list[index] = [small_left, large_right]
 
-        for i, right_arr in enumerate(intervals[1:], start=1):
-            if add_single:
-                left_arr = intervals[i - 1]
-                if test_overlap(left_arr, right_arr):
-                    make_overlap(left_arr, right_arr)
-                    add_single = False
-                else:
-                    if i == 1:
-                        result_list.append(right_arr)
-                    add_single = True
-            elif len(result_list) > 0:
+        for i, right_arr in enumerate(intervals):
+            if i == 0:
+                result_list.append(right_arr)
+            else:
                 last_result = len(result_list) - 1
                 if test_overlap(result_list[last_result], right_arr):
                     change_overlap(last_result, result_list[last_result], right_arr)
-                    add_single = False
                 else:
-                    add_single = True
-            if add_single:
-                result_list.append(right_arr)
+                    result_list.append(right_arr)
 
         return result_list
 
 
 sol = Solution()
+
 test_set = [
-    {
-        "no": "eighth",
-        "interval": [[1,3]],
-        "answer": [[1,3]]
-    }
-]
-backup_tests = [
     {
         "no": "first",
         "interval": [[1, 3], [2, 6], [8, 10], [15, 18]],
@@ -87,7 +63,7 @@ backup_tests = [
     },
     {
         "no": "sixth",
-        "reset_values": [[1, 3], [2, 6], [8, 10], [15, 18]],
+        "sorted": [[1, 3], [2, 6], [8, 10], [15, 18]],
         "interval": [[1, 3], [2, 6], [8, 10], [15, 18]],
         "answer": [[1, 6], [8, 10], [15, 18]]
     },
@@ -95,6 +71,22 @@ backup_tests = [
         "no": "seventh",
         "interval": [[2, 3], [4, 5], [6, 7], [8, 9], [1, 10]],
         "answer": [[1, 10]]
+    },
+    {
+        "no": "eighth",
+        "interval": [[1,3]],
+        "answer": [[1,3]]
+    },
+    {
+        "no": "nine",
+        "interval": [[1, 4], [5, 6]],
+        "answer": [[1, 4], [5, 6]]
+    },
+    {
+        "no": "ten",
+        "sorted": [[1, 3], [2, 3], [2, 2], [2, 2], [3, 3], [4, 6], [5, 7]],
+        "interval": [[2, 3], [2, 2], [3, 3], [1, 3], [5, 7], [2, 2], [4, 6]],
+        "answer": [[1, 3], [4, 7]]
     }
 ]
 
