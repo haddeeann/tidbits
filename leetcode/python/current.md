@@ -1,1 +1,1 @@
-working on subsequence #392 and fizzbuzz #412
+working on letter combo #17 and fizzbuzz #412

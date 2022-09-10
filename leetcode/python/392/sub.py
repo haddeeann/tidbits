@@ -7,7 +7,7 @@ class Solution(object):
         """
         r = ""
         i = 0
-        last_s = len(s) - 1
+        last_s = len(s)
         for x in t:
             if i < last_s and x == s[i]:
                 r += x
