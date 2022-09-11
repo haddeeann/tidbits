@@ -4,9 +4,8 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-        answer = []
-        letter_combo = ''
-        l = {
+        answer = ['']
+        lookup = {
             "2": "abc",
             "3": "def",
             "4": "ghi",
@@ -16,16 +15,16 @@ class Solution(object):
             "8": "tuv",
             "9": "wxyz"
         }
-        for x in digits:
-            letters = l[x]
-            n = (len(digits) - 1) * 3
-            for a in range(n):
-                len_answer = len(answer)
-                if a < len_answer:
-                    answer[a] = letters[0]
-                else:
-                    answer.append(letters[0])
-            print(letters)
+
+        for s in digits:
+            if s in lookup:
+                build = []
+                for a in answer:
+                    for letter in lookup[s]:
+                        build.append(a + letter)
+                answer = build
+
+        return [a for a in answer if not a == '']
 
 
 sol = Solution()
@@ -33,8 +32,10 @@ sol = Solution()
 test_cases = [
     {
         "no": "one",
-        "input": "23",
-        "answer": ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
+        "input": "234",
+        "answer": ["adg", "adh", "adi", "aeg", "aeh", "aei", "afg", "afh", "afi",
+                   "bdg", "bdh", "bdi", "beg", "beh", "bei", "bfg", "bfh", "bfi",
+                   "cdg", "cdh", "cdi", "ceg", "ceh", "cei", "cfg", "cfh", "cfi"]
     },
     {
         "no": "two",
