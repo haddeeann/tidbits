@@ -14,13 +14,16 @@ class Solution(object):
         """
         node_a = list1
         node_b = list2
+        arr = []
         while node_a or node_b:
             if node_a:
-                print(node_a.val)
+                arr.append(node_a.val)
                 node_a = node_a.next
-            elif node_b:
-                print(node_b.val)
+            if node_b:
+                arr.append(node_b.val)
                 node_b = node_b.next
+        return createLinkedList(arr)
+
 
 
 
@@ -40,16 +43,27 @@ test_cases = [
         "no": "one",
         "input_1": createLinkedList([1, 2, 4]),
         "input_2": createLinkedList([1, 3, 4]),
-        "answer": createLinkedList([1, 1, 2, 3, 4, 4])
+        "answer": createLinkedList([1, 1, 2, 3, 4, 4]),
+        "l": len([1, 1, 2, 3, 4, 4])
     }
 ]
 
 for test in test_cases:
-    result = sol.mergeTwoLists(test["input_1"], test["input_2"])
-    # if result == test["answer"]:
-    #     print("answer is RIGHT")
-    # else:
-    #     print("failed")
+    r = sol.mergeTwoLists(test["input_1"], test["input_2"])
+    counter = 0
+    a = test["answer"]
+    while r or a:
+        if r and a:
+            if r.val == a.val:
+                r = r.next
+                a = a.next
+                print("all good")
+            else:
+                print("Failed, not equal")
+        else:
+            print("failed, not equal")
+
+    print("lack of failure is success")
 
 
 backup = [
