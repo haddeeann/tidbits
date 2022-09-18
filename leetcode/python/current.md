@@ -1,1 +1,1 @@
-fizzbuzz #412
+linked cycle #142
