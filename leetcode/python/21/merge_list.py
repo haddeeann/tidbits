@@ -27,8 +27,6 @@ class Solution(object):
         return createLinkedList(arr)
 
 
-
-
 # https://stackoverflow.com/questions/71569455/traverse-listnode-in-python
 def createLinkedList(values):
     head = None
