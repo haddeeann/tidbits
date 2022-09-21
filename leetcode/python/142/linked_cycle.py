@@ -11,14 +11,13 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        ulist = []
-        step = head
-        while step:
-            if step.val in ulist:
-                return step
-            ulist.append(step.val)
-            step = step.next
-        return -1
+        h = {}
+        while head and head.next:
+            if head in h:
+                return h
+            h[head] = 0
+            head = head.next
+
 
 # https://stackoverflow.com/questions/71569455/traverse-listnode-in-python
 def createLinkedList(values):
