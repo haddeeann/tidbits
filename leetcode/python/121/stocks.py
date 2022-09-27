@@ -6,13 +6,14 @@ class Solution(object):
         """
         highest_profit = 0
         # do it stupid first
+        cache = None
         for b, buy_price in enumerate(prices):
             highest_price = buy_price
-            print(f"buy day is {b} ${buy_price}")
-            for s, sell_price in enumerate(prices[b+1:], start=b+1):
-                if not highest_price or sell_price > highest_price:
-                    highest_price = sell_price
-                    print(f"SELL day is: {s} ${sell_price}")
+            if not cache or b >= cache:
+                for s, sell_price in enumerate(prices[b+1:], start=b+1):
+                    if sell_price > highest_price:
+                        cache = s
+                        highest_price = sell_price
             profit = highest_price - buy_price
             if profit > highest_profit:
                 highest_profit = profit
@@ -21,6 +22,6 @@ class Solution(object):
 
 
 
-test = [7,1,5,3,6,4]
+test = [2,1,4]
 sol = Solution()
 sol.maxProfit(test)
