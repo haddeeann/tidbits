@@ -28,7 +28,21 @@ class Solution(object):
             return res
 
         def twoSum(nums: List[int], target: int):
-            pass
+            res = []
+            lo, hi = 0, len(nums) - 1
+
+            while lo < hi:
+                curr_sum = nums[lo] + nums[hi]
+                if curr_sum < target or (lo > 0 and nums[lo] == nums[lo - 1]):
+                    log += 1
+                elif curr_sum > target or (hi < len(nums) - 1 and nums[hi] == nums[hi + 1]):
+                    hi -= 1
+                else:
+                    res.append([nums[lo], nums[hi]])
+                    lo += 1
+                    hi -= 1
+
+            return res
 
         nums.sort()
         return kSum(nums, target, 4)
