@@ -5,7 +5,7 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        def kSum(nums: List[int], target: int, k: int):
+        def kSum(nums, target, k):
             res = []
 
             if not nums:
@@ -23,18 +23,19 @@ class Solution(object):
                 # if it's the first value or if it's not a repeat
                 if i == 0 or nums[i - 1] != value:
                     for subset in kSum(nums[i + 1:], target - value, k - 1):
-                        res.append(value + subset)
+                        print(subset)
+                        res.append([value] + subset)
 
             return res
 
-        def twoSum(nums: List[int], target: int):
+        def twoSum(nums, target):
             res = []
             lo, hi = 0, len(nums) - 1
 
             while lo < hi:
                 curr_sum = nums[lo] + nums[hi]
                 if curr_sum < target or (lo > 0 and nums[lo] == nums[lo - 1]):
-                    log += 1
+                    lo += 1
                 elif curr_sum > target or (hi < len(nums) - 1 and nums[hi] == nums[hi + 1]):
                     hi -= 1
                 else:
