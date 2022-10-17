@@ -6,29 +6,43 @@ class ListNode(object):
 
 
 class Solution(object):
+    def findLengthList(self, head):
+        count = 0
+        node = head
+        while node:
+            count += 1
+            node = node.next
+        return count
+
+    def removeNode(self, head, node_remove):
+        count = 0
+        node = head
+        answer = []
+        while node:
+            if count != node_remove:
+                answer.append(node.val)
+            node = node.next
+            count += 1
+
+        return answer
+
+    def makeNodeList(self, values):
+        h = None
+        for val in reversed(values):
+            h = ListNode(val, h)
+        return h
+
     def removeNthFromEnd(self, head, n):
         """
         :type head: ListNode
         :type n: int
         :rtype: ListNode
         """
-        count = 0
-        node = head
-        new_linked = []
-        while node:
-            count += 1
-            node = node.next
-
-        print(count)
-        node_remove = n - count
-        count = 0
-        while node:
-            new_linked.append(node.val)
-            count += 1
-            node = node.next
-            if count == node_remove:
-                skip
-        print(new_linked)
+        l = findLengthList(head)
+        node_remove = n - l - 1
+        values = removeNode(head, node_remove)
+        node_answer = makeNodeList(values)
+        return node_answer
 
 
 def createLinkedList(values):
