@@ -38,10 +38,11 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        l = findLengthList(head)
-        node_remove = n - l - 1
-        values = removeNode(head, node_remove)
-        node_answer = makeNodeList(values)
+        l = self.findLengthList(head)
+        node_remove = l - n
+        values = self.removeNode(head, node_remove)
+        print(values)
+        node_answer = self.makeNodeList(values)
         return node_answer
 
 
