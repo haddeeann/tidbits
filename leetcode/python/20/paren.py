@@ -4,17 +4,22 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        start_set = {"(", "[", "{"}
-        end_set = {")", "]", "}"}
-        index = 0
-        for l in s:
-            if l in start_set and index != len(s) - 1:
-                if s[index+1] in end_set:
-                    index += 2
+        pair_dict = {"(": ")", "[": "]", "{": "}"}
+        i = 0
+        length_s = len(s)
+        while i < length_s:
+            if s[i] in pair_dict:
+                left = s[i]
+                right = pair_dict[left]
+                if i != len(s) and s[i+1] == right:
+                    i += 2
+                else:
+                    return False
             else:
-                index += 1
+                i += 1
+        return True
 
 
 
 s = Solution()
-s.isValid("()")
+s.isValid("{[]}")
