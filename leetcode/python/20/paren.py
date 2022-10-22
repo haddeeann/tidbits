@@ -4,22 +4,38 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        pair_dict = {"(": ")", "[": "]", "{": "}"}
+        open = {
+            "(": 0,
+            "[": 0,
+            "{": 0
+        }
+
+        close = {
+            ")": "(",
+            "]": "[",
+            "}": "{"
+        }
         i = 0
         length_s = len(s)
         while i < length_s:
-            if s[i] in pair_dict:
-                left = s[i]
-                right = pair_dict[left]
-                if i != len(s) and s[i+1] == right:
-                    i += 2
-                else:
+            c = s[i]
+            if c in open:
+                open[c] += 1
+            elif c in close:
+                o = close[c]
+                open[o] -= 1
+            for t in open:
+                if open[t] < 0:
                     return False
-            else:
-                i += 1
+            i += 1
         return True
 
 
 
 s = Solution()
-s.isValid("{[]}")
+test_1 = "([)]"
+test_2 = "{[]}"
+if not s.isValid(test_1):
+    print("test passed")
+else:
+    print("test failed")
