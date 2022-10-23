@@ -4,38 +4,54 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        open = {
-            "(": 0,
-            "[": 0,
-            "{": 0
-        }
-
         close = {
             ")": "(",
             "]": "[",
             "}": "{"
         }
         i = 0
+        build = ""
         length_s = len(s)
         while i < length_s:
-            c = s[i]
-            if c in open:
-                open[c] += 1
-            elif c in close:
-                o = close[c]
-                open[o] -= 1
-            for t in open:
-                if open[t] < 0:
+            p = s[i]
+            if p not in close:
+                build += p
+            elif p in close:
+                if len(build) == 0:
+                    return False
+                last_letter = build[len(build) - 1]
+                if last_letter == close[p]:
+                    build = build[:-1]
+                else:
                     return False
             i += 1
-        return True
+
+        return len(build) == 0
 
 
 
 s = Solution()
 test_1 = "([)]"
 test_2 = "{[]}"
+test_3 = "["
+test_4 = "]"
+
 if not s.isValid(test_1):
+    print("test passed")
+else:
+    print("test failed")
+
+if s.isValid(test_2):
+    print("test passed")
+else:
+    print("test failed")
+
+if not s.isValid(test_3):
+    print("test passed")
+else:
+    print("test failed")
+
+if not s.isValid(test_4):
     print("test passed")
 else:
     print("test failed")
