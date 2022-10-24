@@ -1,4 +1,11 @@
 class Solution(object):
+    def outsideIn(self, str, n, pair, l_box, r_box):
+        for i in range(1):
+            str += l_box
+            str = self.sideBySide(str, n - 1, pair)
+            str += r_box
+        return str
+
     def sideBySide(self, str, t, pair):
         for i in range(t):
             for p in pair:
@@ -20,24 +27,24 @@ class Solution(object):
         l_box = "("
         r_box = ")"
         pair = [l_box, r_box]
-        a = self.innerParen("", 3, pair)
+        a = self.innerParen("", n, pair)
         print(a)
 
-        b = ""
-        for i in range(1):
-            b += l_box
-            b = self.sideBySide(b, 2, pair)
-            b += r_box
+        b = self.outsideIn("", n, pair, l_box, r_box)
         print(b)
 
+        count = n
         c = ""
-        c = self.innerParen(c, 2, pair)
-        c = self.innerParen(c, 1, pair)
+        while count > 1:
+            count -= 1
+            c = self.innerParen(c, count, pair)
         print(c)
 
         d = ""
-        d = self.innerParen(d, 1, pair)
-        d = self.innerParen(d, 2, pair)
+        count = 0
+        while count < n - 1:
+            count += 1
+            d = self.innerParen(d, count, pair)
         print(d)
 
 
