@@ -27,20 +27,25 @@ class Solution(object):
         l_box = "("
         r_box = ")"
         pair = [l_box, r_box]
+        # a = self.innerParen("", n, pair)
+        # print(a)
 
-        right = 0
-        while right < n:
-            c = ""
-            left = n - right
-            c = self.innerParen(c, left, pair)
+        count = n
+        c = ""
+        c = self.innerParen(c, count, pair)
+        print(c)
 
-            d = ""
-            d = self.sideBySide(d, right, pair)
-            print(c + d)
-            if right != 0 and left != 1:
-                print(d + c)
-            right += 1
+        # d = ""
+        # count = 0
+        # while count < n - 1:
+        #     count += 1
+        #     d = self.innerParen(d, count, pair)
+        # print(d)
+
+        # b = self.outsideIn("", n, pair, l_box, r_box)
+        # print(b)
+
 
 
 sol = Solution()
-sol.generateParenthesis(5)
+sol.generateParenthesis(2)
