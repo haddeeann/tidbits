@@ -1,62 +1,36 @@
 class Solution(object):
-    def outsideIn(self, str, n, pair, l_box, r_box):
-        for i in range(1):
-            str += l_box
-            str = self.sideBySide(str, n - 1, pair)
-            str += r_box
-        return str
-
-    def sideBySide(self, str, t, pair):
-        for i in range(t):
-            for p in pair:
-                str += p
-        return str
-
-    def innerParen(self, str, t, pair):
-        for p in pair:
-            for i in range(t):
-                str += p
-        return str
-
-    def insertInner(self, outer, inner):
-        half = int(len(outer) / 2)
-        left = outer[:half]
-        right = outer[half:]
-        return left + inner + right
-
     def generateParenthesis(self, n):
-        """
-        :type n: int
-        :rtype: List[str]
-        """
-        # pairs
-        l_box = "("
-        r_box = ")"
-        pair = [l_box, r_box]
-        inner = n - 1
-        answer = []
-        while inner >= 2:
-            outer = n - inner
+        def generate(A = []):
+            if len(A) == 2*n:
+                if valid(A):
+                    str_answer = "".join(A)
+                    ans.append(str_answer)
+            else:
+                A.append('(')
+                generate(A)
+                A.pop()
+                A.append(')')
+                generate(A)
+                A.pop()
 
-            outer_paren = self.innerParen("", outer, pair)
-            inner_paren = self.sideBySide("", inner, pair)
-            e = self.insertInner(outer_paren, inner_paren)
-            answer.append(e)
-            inner -= 1
+        def valid(A):
+            bal = 0
+            for c in A:
+                if c == '(':
+                    bal += 1
+                else:
+                    bal -= 1
 
-        right = 0
-        while right < n:
-            c = ""
-            left = n - right
-            c = self.innerParen(c, left, pair)
+                if bal < 0:
+                    return False
+            return_balance = bal == 0
+            if return_balance:
+                print('hi')
+            return return_balance
 
-            d = ""
-            d = self.sideBySide(d, right, pair)
-            answer.append(c + d)
-            if right != 0 and left != 1:
-                answer.append(d + c)
-            right += 1
-        return answer
+        ans = []
+        generate()
+        return ans
 
 
 sol = Solution()
