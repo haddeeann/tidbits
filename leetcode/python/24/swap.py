@@ -6,23 +6,19 @@ class ListNode(object):
 
 
 class Solution(object):
-    def swap(self, node1, node2):
-        temp = node1
-        node1 = node2
-        node2 = node1
-
     def swapPairs(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
-        temp = head
-        while temp and temp.next:
-            temp = a
-            a = b
-            b = fuck
-        return head
-
+        if not head:
+            return head
+        dummy = ListNode(0)
+        dummy.next, head = head, dummy
+        while head.next and head.next.next:
+            a, b = head.next, head.next.next
+            head.next, a.next, b.next, head = b, b.next, a, a
+        return dummy.next
 
 def createLinkedList(values):
     h = None
