@@ -11,13 +11,16 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head:
-            return head
         dummy = ListNode(0)
-        dummy.next, head = head, dummy
+        dummy.next = head
+        head = dummy
         while head.next and head.next.next:
-            a, b = head.next, head.next.next
-            head.next, a.next, b.next, head = b, b.next, a, a
+            a = head.next
+            b = head.next.next
+            head.next = b
+            a.next = b.next
+            b.next = a
+            head = a
         return dummy.next
 
 def createLinkedList(values):
@@ -29,7 +32,7 @@ def createLinkedList(values):
 
 
 sol = Solution()
-l = [1,2,3,4]
+l = [1,2,3,4,5,6]
 
 ll = createLinkedList(l)
 sol.swapPairs(ll)
