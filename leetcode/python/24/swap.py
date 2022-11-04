@@ -15,12 +15,22 @@ class Solution(object):
         dummy.next = head
         head = dummy
         while head.next and head.next.next:
-            a = head.next
-            b = head.next.next
-            head.next = b
-            a.next = b.next
-            b.next = a
-            head = a
+            # original places
+            first = head.next
+            print(first.val)
+            second = first.next
+            print(second.val)
+            third = second.next
+            if third:
+                print(third.val)
+            # swap the second and make it first
+            head.next = second
+            # make the first the second
+            second.next = first
+            # put the next node on the original first node
+            first.next = third
+            # use the head as a looping point by putting the first on it
+            head = first
         return dummy.next
 
 def createLinkedList(values):
