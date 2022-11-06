@@ -1,4 +1,17 @@
 class Solution(object):
+    def find_a(self, dividend, divisor):
+        k = 0
+        a = 0
+        for n in range(dividend):
+            if k == divisor - 1:
+                print(n)
+                a += 1
+            if k < divisor - 1:
+                k += 1
+            else:
+                k = 0
+        return a
+
     def divide(self, dividend, divisor):
         """
         :type dividend: int
@@ -25,16 +38,7 @@ class Solution(object):
         elif divisor == 1:
             a = dividend
         else:
-            k = 0
-            a = 0
-            for n in range(dividend):
-                if k == divisor - 1:
-                    print(n)
-                    a += 1
-                if k < divisor - 1:
-                    k += 1
-                else:
-                    k = 0
+            a = self.find_a(dividend, divisor)
         if (neg_divisor and not neg_dividend) or (not neg_divisor and neg_dividend):
             a = -abs(a)
         if a > pos_limit:
@@ -45,4 +49,4 @@ class Solution(object):
 
 
 sol = Solution()
-sol.divide(2147483647, 2)
+sol.find_a(2147483647, 2)
