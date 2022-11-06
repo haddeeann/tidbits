@@ -41,6 +41,13 @@ def createLinkedList(values):
     return h
 
 
+def createLinkedList(values):
+    h = None
+    for val in reversed(values):
+        h = ListNode(val, h)
+    return h
+
+
 sol = Solution()
 l = [1,2,3,4,5,6]
 
