@@ -2,14 +2,18 @@ class Solution(object):
     def find_a(self, dividend, divisor):
         k = 0
         a = 0
-        for n in range(dividend):
-            if k == divisor - 1:
-                print(n)
+        counter = divisor
+        if divisor % 2 == 0:
+            answer = dividend
+            while divisor > 0:
+                answer = answer >> 1
+                divisor -= 2
+            a = answer
+        else:
+            while counter < dividend:
                 a += 1
-            if k < divisor - 1:
-                k += 1
-            else:
-                k = 0
+                counter += divisor
+        print(a)
         return a
 
     def divide(self, dividend, divisor):
@@ -45,8 +49,10 @@ class Solution(object):
             a = pos_limit
         elif a < neg_limit:
             a = neg_limit
+        print(a)
         return a
 
 
 sol = Solution()
-sol.find_a(2147483647, 2)
+# sol.find_a(2147483647, 2)
+sol.find_a(12, 4)
