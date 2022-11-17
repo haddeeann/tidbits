@@ -21,6 +21,7 @@ class Solution(object):
                     start = found + l - 1
 
         for index in found_dict:
+            # can't be a set because the words need to be repeated, try a dictionary
             s_set = set(words)
             step = index
             count = 0
