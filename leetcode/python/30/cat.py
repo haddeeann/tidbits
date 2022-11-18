@@ -53,3 +53,7 @@ word_list = ["word","good","best","good"]
 
 ans = sol.findSubstring(s=string, words=word_list)
 # answer should be [8]
+
+# time limit exceeded
+s = "a"
+words = ["a"]
