@@ -6,11 +6,16 @@ class Solution(object):
         :rtype: List[int]
         """
         found_dict = {}
+        words_dict = {}
         win = len(words)
         count = 0
         answer = []
         l = len(words[0])
         for w in words:
+            if w in words_dict:
+                words_dict[w] += 1
+            else:
+                words_dict[w] = 1
             found = 0
             start = 0
             while found != -1:
@@ -22,17 +27,16 @@ class Solution(object):
 
         for index in found_dict:
             # can't be a set because the words need to be repeated, try a dictionary
-            s_set = set(words)
+            words_copy = words_dict.copy()
             step = index
             count = 0
-            while len(s_set) > 0:
+            while count < len(words):
                 if step in found_dict:
                     word = found_dict[step]
-                    if word in s_set:
+                    if word in words_copy and words_copy[word] > 0:
                         count += 1
-                        s_set.remove(word)
-                        word_len = len(word)
-                        step = step + word_len
+                        words_copy[word] -= 1
+                        step += len(word)
                     else:
                         break
                 else:
