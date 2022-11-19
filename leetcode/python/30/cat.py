@@ -24,6 +24,8 @@ class Solution(object):
                 if found != -1:
                     found_dict[found] = w
                     start = found + l - 1
+                if start == 0 or start > len(words):
+                    break
 
         for index in found_dict:
             # can't be a set because the words need to be repeated, try a dictionary
@@ -48,12 +50,14 @@ class Solution(object):
 
 
 sol = Solution()
-string = "wordgoodgoodgoodbestword"
-word_list = ["word","good","best","good"]
-
+# string = "wordgoodgoodgoodbestword"
+# word_list = ["word","good","best","good"]
+# string = "a"
+# word_list = ["a"]
+string = "barfoothefoobarman"
+word_list = ["foo","bar"]
 ans = sol.findSubstring(s=string, words=word_list)
 # answer should be [8]
 
 # time limit exceeded
-s = "a"
-words = ["a"]
+
