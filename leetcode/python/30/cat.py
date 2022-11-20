@@ -24,7 +24,7 @@ class Solution(object):
                 if found != -1:
                     found_dict[found] = w
                     start = found + l - 1
-                if start == 0 or start > len(words):
+                if start == 0 or start > len(s):
                     break
 
         for index in found_dict:
@@ -50,12 +50,12 @@ class Solution(object):
 
 
 sol = Solution()
-# string = "wordgoodgoodgoodbestword"
-# word_list = ["word","good","best","good"]
+string = "wordgoodgoodgoodbestword"
+word_list = ["word","good","best","good"]
 # string = "a"
 # word_list = ["a"]
-string = "barfoothefoobarman"
-word_list = ["foo","bar"]
+# string = "barfoothefoobarman"
+# word_list = ["foo","bar"]
 ans = sol.findSubstring(s=string, words=word_list)
 # answer should be [8]
 
