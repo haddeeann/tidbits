@@ -50,14 +50,14 @@ class Solution(object):
 
 
 sol = Solution()
-string = "wordgoodgoodgoodbestword"
-word_list = ["word","good","best","good"]
+# string = "wordgoodgoodgoodbestword"
+# word_list = ["word","good","best","good"]
 # string = "a"
 # word_list = ["a"]
-# string = "barfoothefoobarman"
-# word_list = ["foo","bar"]
+string = "aaa"
+word_list = ["a","a"]
 ans = sol.findSubstring(s=string, words=word_list)
-# answer should be [8]
+# answer should be [0,1]
 
 # time limit exceeded
 
