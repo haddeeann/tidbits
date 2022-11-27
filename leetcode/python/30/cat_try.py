@@ -1,38 +1,40 @@
 from collections import deque, defaultdict
 
+
 class Solution:
     def findSubstring(self, s, words):
         word_len = len(words[0])
-        owd = defaultdict(int)
+        ori_word_dict = defaultdict(int)
 
         for word in words:
-            owd[word] += 1
+            ori_word_dict[word] += 1
 
-            all = len(words) * word_len
-            result = []
-            for i in range(word_len):
-                que = deque()
-                word_dict = owd.copy()
-                for j in range(i, len(s) - word_len + 1, word_len):
-                    word = s[j:j + word_len]
-                    if word in word_dict:
-                        word_dict[word] -= 1
-                        que.append(word)
-                        if sum(word_dict.values()) == 0:
-                            result.append(j - all + word_len)
-                            elem = que.popleft()
-                            word_dict[elem] = word_dict.get(elem, 0) + 1
-                    else:
-                        while len(que):
-                            elem = que.popleft()
-                            if elem == word:
-                                que.append(word)
-                                break
-                            else:
-                                word_dict[elem] = word_dict.get(elem, 0) + 1
-                                if word_dict[elem] > owd[elem]:
-                                    word_dict = owd.copy()
-            return result
+        all_word_len = len(words) * word_len
+        result = []
+        for i in range(word_len):
+            queue = deque()
+            word_dict = ori_word_dict.copy()
+            for j in range(i, len(s) - word_len + 1, word_len):
+                word = s[j:j + word_len]
+                if word_dict.get(word, 0) != 0:
+                    word_dict[word] -= 1
+                    queue.append(word)
+                    if sum(word_dict.values()) == 0:
+                        result.append(j - all_word_len + word_len)
+                        last_element = queue.popleft()
+                        word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                else:
+                    while len(queue):
+                        last_element = queue.popleft()
+                        if last_element == word:
+                            queue.append(word)
+                            break
+                        else:
+                            word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                            if word_dict[last_element] > ori_word_dict[last_element]:
+                                word_dict = ori_word_dict.copy()
+
+        return result
 
 sol = Solution()
 answers = [
@@ -41,11 +43,11 @@ answers = [
     #     "word_list": ["a", "a"],
     #     "answer": [0, 1]
     # },
-    # {
-    #     "string": "ababababab",
-    #     "word_list": ["ababa","babab"],
-    #     "answer": [0]
-    # },
+    {
+        "string": "abcdefghij",
+        "word_list": ["abcde", "fghij"],
+        "answer": [0]
+    },
 ]
 
 for a in answers:
