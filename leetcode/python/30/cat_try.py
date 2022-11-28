@@ -43,12 +43,18 @@ answers = [
     #     "word_list": ["a", "a"],
     #     "answer": [0, 1]
     # },
+    # {
+    #     "string": "12abcdefghij",
+    #     "word_list": ["abcde", "fghij"],
+    #     "answer": [0]
+    # },
     {
-        "string": "abcdefghij",
-        "word_list": ["abcde", "fghij"],
-        "answer": [0]
-    },
+        "string": "barfoothefoobarman",
+        "word_list": ["foo","bar"],
+        "answer": [0,9],
+    }
 ]
+
 
 for a in answers:
     a["answer"].sort()
