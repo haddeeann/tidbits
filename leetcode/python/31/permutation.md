@@ -1,7 +1,7 @@
 
 Leran more about permutations:
 
-https://www.youtube.com/watch?v=GCm7m5671Ps
+[https://www.youtube.com/watch?v=GCm7m5671Ps](watch permutations on youtube)
 
 A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
 
