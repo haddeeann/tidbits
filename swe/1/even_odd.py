@@ -11,12 +11,35 @@ def createLinkedList(values):
 
     return h
 
-def evenOdd(linked):
-    first = ListNode()
-    last = ListNode()
-    while linked:
-        print(linked.val)
-        linked = linked.next
+
+def evenOdd(head):
+    if head == None or head.next == None:
+        return head
+
+    odd_dummy = ListNode(-1)
+    even_dummy = ListNode(-1)
+
+    odd_tail = odd_dummy
+    even_tail = even_dummy
+
+    index = 0
+    curr = head
+    while curr != None:
+        if index % 2 == 0:
+            even_tail.next = curr
+            even_tail = curr
+        else:
+            odd_tail.next = curr
+            odd_tail = curr
+
+        curr = curr.next
+        index += 1
+
+    even_tail.next = odd_dummy.next
+    odd_tail.next = None
+
+    return even_dummy.next
+
 
 tests = [
     {
@@ -26,4 +49,7 @@ tests = [
 
 for test in tests:
     linked_list = createLinkedList(test["input"])
-    evenOdd(linked_list)
+    answer = evenOdd(linked_list)
+    while answer:
+        print(answer.val)
+        answer = answer.next
