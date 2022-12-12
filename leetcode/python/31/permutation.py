@@ -4,52 +4,32 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        nums = ["a", "b", "c", "d", "pop"]
+        nums = [1, 2, 3, 4, 5]
         i = len(nums) - 1
-        swap = nums[i]
-        nums.remove(swap)
-        while i >= 0:
-            nums.insert(i, swap)
-            print(i, nums)
-            nums.remove(swap)
+        right = None
+        reverse = True
+        while i >= 1:
+            if nums[i - 1] < nums[i]:
+                left_i = i - 1
+                left = nums[i - 1]
+                j = i
+                while j < len(nums):
+                    if nums[j] > left:
+                        if not right or nums[j] <= right:
+                            right = nums[j]
+                            right_i = j
+                    j += 1
+                nums[left_i] = right
+                nums[right_i] = left
+                nums[i:] = nums[i:][::-1]
+                reverse = False
+                break
             i -= 1
+        if reverse:
+            nums.reverse()
 
 
-
-arr = [1, 2, 3]
-
-answer = [
-    [1, 2, 3],
-    [1, 3, 2],
-    [2, 1, 3],
-    [2, 3, 1],
-    [3, 1, 2],
-    [3, 2, 1]
-]
+test = [2, 3, 1, 3, 3]
 
 sol = Solution()
-sol.nextPermutation()
-
-
-answer_2 = [
-    [1, 2, 3, 4, 5],
-
-    [1, 2, 3, 5, 4],
-
-    [1, 2, 5, 3, 4],
-    [1, 2, 5, 4, 3],
-
-    [1, 5, 2, 3, 4],
-    [1, 5, 4, 2, 3],
-    [1, 5, 4, 3, 2],
-
-    [2, 1, 3, 4, 5],
-    [2, 5, 1, 3, 4],
-    [2, 5, 4, 1, 3],
-    [2, 5, 4, 3, 1],
-
-    [2, 5, 3, 1, 4],
-    [2, 5, 3, 4, 1],
-
-    [2, 5, 1, 3, 4],
-]
+sol.nextPermutation(test)
