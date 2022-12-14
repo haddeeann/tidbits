@@ -4,24 +4,27 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        balance = 0
-        build = ""
-        count = 0
         max_count = 0
-        for p in s:
-            if p == ")":
-                balance -= 1
-                if balance != 0:
-                    balance = 0
-                    build = ""
-                else:
-                    build += ")"
-                    count += 2
-                    if count > max_count:
-                        max_count = count
-            elif p == "(":
-                build += "("
-                balance += 1
+        c = 0
+        while c < len(s):
+            splice = s[c:]
+            balance = 0
+            count = 0
+            build = ""
+            for p in splice:
+                if p == ")":
+                    balance -= 1
+                    if balance != 0:
+                        break
+                    else:
+                        build += ")"
+                        count += 2
+                        if count > max_count:
+                            max_count = count
+                elif p == "(":
+                    build += "("
+                    balance += 1
+            c += 1
         return max_count
 
 
@@ -37,6 +40,14 @@ tests = [
     {
         "input": "(()",
         "answer": 2,
+    },
+    {
+        "input": ")()())",
+        "answer": 4
+    },
+    {
+        "input": "()(())",
+        "answer": 6
     }
 ]
 sol = Solution()
