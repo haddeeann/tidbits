@@ -6,7 +6,8 @@ class Solution(object):
         """
         max_count = 0
         c = 0
-        pending = ""
+        pending_left = ""
+        pending_right = ""
         while c < len(s):
             splice = s[c:]
             balance = 0
@@ -17,11 +18,14 @@ class Solution(object):
                     if balance < 0:
                         break
                     else:
-                        build += pending
-                        build += ")"
-                        pending = ""
+                        pending_right += ")"
+                        if len(pending_left) == len(pending_right):
+                            build += pending_left
+                            build += pending_right
+                            pending_left = ""
+                            pending_right = ""
                 elif p == "(":
-                    pending += "("
+                    pending_left += "("
                     balance += 1
             if len(build) > max_count:
                 max_count = len(build)
@@ -30,10 +34,10 @@ class Solution(object):
 
 
 tests = [
-    {
-        "input": ")()())",
-        "answer": 4,
-    },
+    # {
+    #     "input": ")()())",
+    #     "answer": 4,
+    # },
     {
         "input": "()(()",
         "answer": 2,
@@ -42,18 +46,18 @@ tests = [
         "input": "(()",
         "answer": 2,
     },
-    {
-        "input": ")()())",
-        "answer": 4
-    },
-    {
-        "input": "()(())",
-        "answer": 6
-    },
-    {
-        "input": "(())(",
-        "answer": 4
-    }
+    # {
+    #     "input": ")()())",
+    #     "answer": 4
+    # },
+    # {
+    #     "input": "()(())",
+    #     "answer": 6
+    # },
+    # {
+    #     "input": "(())(",
+    #     "answer": 4
+    # }
 ]
 sol = Solution()
 for t in tests:
