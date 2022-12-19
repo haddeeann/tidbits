@@ -6,29 +6,22 @@ class Solution(object):
         """
         max_count = 0
         c = 0
-        pending_left = ""
-        pending_right = ""
         while c < len(s):
-            splice = s[c:]
-            balance = 0
+            balance = ""
             build = ""
+            splice = s[c:]
             for p in splice:
                 if p == ")":
-                    balance -= 1
-                    if balance < 0:
+                    if balance == "":
                         break
                     else:
-                        pending_right += ")"
-                        if len(pending_left) == len(pending_right):
-                            build += pending_left
-                            build += pending_right
-                            pending_left = ""
-                            pending_right = ""
+                        balance = balance[1:]
+                        build += ")"
+                        if balance == "" and len(build) > max_count:
+                            max_count = len(build)
                 elif p == "(":
-                    pending_left += "("
-                    balance += 1
-            if len(build) > max_count:
-                max_count = len(build)
+                    balance += "("
+                    build += "("
             c += 1
         return max_count
 
