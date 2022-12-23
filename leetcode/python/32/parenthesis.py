@@ -4,33 +4,24 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        max_count = 0
-        c = 0
-        while c < len(s):
-            balance = ""
-            build = ""
-            splice = s[c:]
-            for p in splice:
-                if p == ")":
-                    if balance == "":
-                        break
-                    else:
-                        balance = balance[1:]
-                        build += ")"
-                        if balance == "" and len(build) > max_count:
-                            max_count = len(build)
-                elif p == "(":
-                    balance += "("
-                    build += "("
-            c += 1
-        return max_count
+        stack = [-1]
+        max_length = 0
+        for i, l in enumerate(s):
+            if l == "(":
+                stack.append(i)
+            elif l == ")":
+                stack.pop()
+            if len(stack) == 0:
+                stack.append(i)
+            last = stack[len(stack) - 1]
+            len_p = i - last
+            if max_length < len_p:
+                max_length = len_p
+        print(stack)
+        return max_length
 
 
 tests = [
-    # {
-    #     "input": ")()())",
-    #     "answer": 4,
-    # },
     {
         "input": "()(()",
         "answer": 2,
@@ -39,18 +30,18 @@ tests = [
         "input": "(()",
         "answer": 2,
     },
-    # {
-    #     "input": ")()())",
-    #     "answer": 4
-    # },
-    # {
-    #     "input": "()(())",
-    #     "answer": 6
-    # },
-    # {
-    #     "input": "(())(",
-    #     "answer": 4
-    # }
+    {
+        "input": ")()())",
+        "answer": 4
+    },
+    {
+        "input": "()(())",
+        "answer": 6
+    },
+    {
+        "input": "(())(",
+        "answer": 4
+    }
 ]
 sol = Solution()
 for t in tests:
