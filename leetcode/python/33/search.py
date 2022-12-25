@@ -5,3 +5,7 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        for i, n in enumerate(nums):
+            if n == target:
+                return i
+        return -1
