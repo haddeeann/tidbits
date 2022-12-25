@@ -13,33 +13,33 @@ class Solution(object):
                 a = target
             if nums[right] == target:
                 b = target
-            if not a:
+            if a is None:
                 left += 1
-            if not b:
+            if b is None:
                 right -= 1
 
-            if a and b:
+            if a is not None and b is not None:
                 return [left, right]
 
         return [-1, -1]
 
 
 tests = [
-    {
-        "input": [5,7,7,8,8,10],
-        "target": 8,
-        "answer": [3, 4]
-    },
+    # {
+    #     "input": [5,7,7,8,8,10],
+    #     "target": 8,
+    #     "answer": [3, 4]
+    # },
     {
         "input": [0,0,0,1,2,3],
         "target": 0,
         "answer": [0, 2]
     },
-    {
-        "input": [1],
-        "target": 1,
-        "answer": [0, 0]
-    }
+    # {
+    #     "input": [1],
+    #     "target": 1,
+    #     "answer": [0, 0]
+    # }
 ]
 sol = Solution()
 for t in tests:
