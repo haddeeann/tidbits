@@ -46,18 +46,13 @@ class Solution(object):
             for r in row_index:
                 temp_row[r] = row_set.copy()
             rows.append(temp_row)
-        #     print(temp_row)
-        # print("------")
-        # print(columns)
-        # print("------")
+
         for r in range(9):
             for s in range(9):
                 see = rows[s][r]
                 if isinstance(see, set):
                     for t in columns[r]:
                         rows[s][r].discard(t)
-        # for row in rows:
-        #     print(row)
 
         print(grids)
 
