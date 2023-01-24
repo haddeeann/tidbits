@@ -9,6 +9,19 @@ class Solution(object):
                 row[i] = row_set.copy()
         return row
 
+    def checkColumns(self, col, board):
+        remove_list = []
+        for row in range(9):
+            if isinstance(board[row][col], str):
+                remove_list.append(board[row][col])
+        print(remove_list)
+        for row in range(9):
+            if isinstance(board[row][col], set):
+                for r in remove_list:
+                    board[row][col].discard(r)
+                print(board[row][col])
+
+
     def solveSudoku(self, board):
         """
         :type board: List[List[str]]
@@ -17,7 +30,8 @@ class Solution(object):
         for i, row in enumerate(board):
             board[i] = self.setupBoard(row)
 
-        print(board)
+        for j in range(9):
+            self.checkColumns(j, board)
 
 
 input = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
