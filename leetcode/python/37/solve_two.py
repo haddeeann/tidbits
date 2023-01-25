@@ -14,12 +14,26 @@ class Solution(object):
         for row in range(9):
             if isinstance(board[row][col], str):
                 remove_list.append(board[row][col])
-        print(remove_list)
+        # print(remove_list)
         for row in range(9):
             if isinstance(board[row][col], set):
                 for r in remove_list:
                     board[row][col].discard(r)
-                print(board[row][col])
+                # print(board[row][col])
+
+    def checkRows(self, row, board):
+        remove_list = []
+        for k in range(9):
+            # print(board[row][k])
+            if isinstance(board[row][k], str):
+                # print(board[row][k])
+                remove_list.append(board[row][k])
+        # print(remove_list)
+        for l in range(9):
+            if isinstance(board[row][l], set):
+                for r in remove_list:
+                    board[row][l].discard(r)
+
 
 
     def solveSudoku(self, board):
@@ -32,6 +46,13 @@ class Solution(object):
 
         for j in range(9):
             self.checkColumns(j, board)
+
+        for j in range(9):
+            print(board[j])
+            self.checkRows(j, board)
+
+        for k in range(9):
+            print(board[k])
 
 
 input = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
