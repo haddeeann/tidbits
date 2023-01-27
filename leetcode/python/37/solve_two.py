@@ -34,7 +34,29 @@ class Solution(object):
                 for r in remove_list:
                     board[row][l].discard(r)
 
+    def checkBoxes(self, left, right, top, bottom, board):
+        # left and right are col, top and bottom are rows
+        step_top = top
+        remove_list = []
+        while step_top < bottom:
+            step_left = left
+            while step_left < right:
+                print(f"row {step_top}: {board[step_top][step_left]}")
+                if isinstance(board[step_top][step_left], str):
+                    remove_list.append(board[step_top][step_left])
+                step_left += 1
+            step_top += 1
 
+        step_top = top
+        while step_top < bottom:
+            step_left = left
+            while step_left < right:
+                print(f"row {step_top}: {board[step_top][step_left]}")
+                if isinstance(board[step_top][step_left], set):
+                    for r in remove_list:
+                        board[step_top][step_left].discard(r)
+                step_left += 1
+            step_top += 1
 
     def solveSudoku(self, board):
         """
@@ -47,9 +69,15 @@ class Solution(object):
         for j in range(9):
             self.checkColumns(j, board)
 
-        for j in range(9):
-            print(board[j])
-            self.checkRows(j, board)
+        for k in range(9):
+            # print(board[j])
+            self.checkRows(k, board)
+
+        left = 0
+        right = 3
+        top = 0
+        bottom = 3
+        self.checkBoxes(left, right, top, bottom, board)
 
         for k in range(9):
             print(board[k])
