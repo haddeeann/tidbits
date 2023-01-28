@@ -10,38 +10,50 @@ class Solution(object):
         return row
 
     def checkColumns(self, col, board):
+        solved = True
         remove_list = []
         for row in range(9):
             if isinstance(board[row][col], str):
                 remove_list.append(board[row][col])
-        # print(remove_list)
+
         for row in range(9):
             if isinstance(board[row][col], set):
                 for r in remove_list:
                     board[row][col].discard(r)
-                # print(board[row][col])
+                if len(board[row][col]) == 1:
+                    board[row][col] = next(iter(board[row][col]))
+                else:
+                    solved = False
+
+        return solved
+
 
     def checkRows(self, row, board):
+        solved = True
         remove_list = []
         for k in range(9):
-            # print(board[row][k])
             if isinstance(board[row][k], str):
-                # print(board[row][k])
                 remove_list.append(board[row][k])
-        # print(remove_list)
+
         for l in range(9):
             if isinstance(board[row][l], set):
                 for r in remove_list:
                     board[row][l].discard(r)
+                if len(board[row][l]) == 1:
+                    board[row][l] = next(iter(board[row][l]))
+                else:
+                    solved = False
+
+        return solved
 
     def checkBoxes(self, left, right, top, bottom, board):
+        solved = True
         # left and right are col, top and bottom are rows
         step_top = top
         remove_list = []
         while step_top < bottom:
             step_left = left
             while step_left < right:
-                print(f"row {step_top}: {board[step_top][step_left]}")
                 if isinstance(board[step_top][step_left], str):
                     remove_list.append(board[step_top][step_left])
                 step_left += 1
@@ -51,12 +63,16 @@ class Solution(object):
         while step_top < bottom:
             step_left = left
             while step_left < right:
-                print(f"row {step_top}: {board[step_top][step_left]}")
                 if isinstance(board[step_top][step_left], set):
                     for r in remove_list:
                         board[step_top][step_left].discard(r)
+                    if len(board[step_top][step_left]) == 1:
+                        board[step_top][step_left] = next(iter(board[step_top][step_left]))
+                    else:
+                        solved = False
                 step_left += 1
             step_top += 1
+        return solved
 
     def solveSudoku(self, board):
         """
@@ -66,21 +82,33 @@ class Solution(object):
         for i, row in enumerate(board):
             board[i] = self.setupBoard(row)
 
-        for j in range(9):
-            self.checkColumns(j, board)
+        solved = False
 
-        for k in range(9):
-            # print(board[j])
-            self.checkRows(k, board)
+        while not solved:
+            # search the columns
+            for j in range(9):
+                solved = self.checkColumns(j, board)
 
-        left = 0
-        right = 3
-        top = 0
-        bottom = 3
-        self.checkBoxes(left, right, top, bottom, board)
+            # search the rows
+            for k in range(9):
+                solved = self.checkRows(k, board)
 
-        for k in range(9):
-            print(board[k])
+            # search the grid
+            top = 0
+            bottom = 3
+            while bottom < 10:
+                left = 0
+                right = 3
+                while right < 10:
+                    solved = self.checkBoxes(left, right, top, bottom, board)
+                    left += 3
+                    right += 3
+                top += 3
+                bottom += 3
+
+        for row in board:
+            print(row)
+        return board
 
 
 input = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
