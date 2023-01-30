@@ -10,7 +10,6 @@ class Solution(object):
         return row
 
     def checkColumns(self, col, board):
-        solved = True
         remove_list = []
         for row in range(9):
             if isinstance(board[row][col], str):
@@ -22,14 +21,9 @@ class Solution(object):
                     board[row][col].discard(r)
                 if len(board[row][col]) == 1:
                     board[row][col] = next(iter(board[row][col]))
-                else:
-                    solved = False
-
-        return solved
 
 
     def checkRows(self, row, board):
-        solved = True
         remove_list = []
         for k in range(9):
             if isinstance(board[row][k], str):
@@ -41,13 +35,8 @@ class Solution(object):
                     board[row][l].discard(r)
                 if len(board[row][l]) == 1:
                     board[row][l] = next(iter(board[row][l]))
-                else:
-                    solved = False
-
-        return solved
 
     def checkBoxes(self, left, right, top, bottom, board):
-        solved = True
         # left and right are col, top and bottom are rows
         step_top = top
         remove_list = []
@@ -68,11 +57,9 @@ class Solution(object):
                         board[step_top][step_left].discard(r)
                     if len(board[step_top][step_left]) == 1:
                         board[step_top][step_left] = next(iter(board[step_top][step_left]))
-                    else:
-                        solved = False
+
                 step_left += 1
             step_top += 1
-        return solved
 
     def solveSudoku(self, board):
         """
@@ -87,11 +74,11 @@ class Solution(object):
         while not solved:
             # search the columns
             for j in range(9):
-                solved = self.checkColumns(j, board)
+                self.checkColumns(j, board)
 
             # search the rows
             for k in range(9):
-                solved = self.checkRows(k, board)
+                self.checkRows(k, board)
 
             # search the grid
             top = 0
@@ -100,11 +87,17 @@ class Solution(object):
                 left = 0
                 right = 3
                 while right < 10:
-                    solved = self.checkBoxes(left, right, top, bottom, board)
+                    self.checkBoxes(left, right, top, bottom, board)
                     left += 3
                     right += 3
                 top += 3
                 bottom += 3
+
+            solved = True
+            for row in board:
+                for col in row:
+                    if isinstance(col, set):
+                        solved = False
 
         for row in board:
             print(row)
