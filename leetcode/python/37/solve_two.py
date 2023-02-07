@@ -9,32 +9,26 @@ class Solution(object):
                 row[i] = row_set.copy()
         return row
 
-    def checkColumns(self, col, board):
-        remove_list = []
-        for row in range(9):
-            if isinstance(board[row][col], str):
-                remove_list.append(board[row][col])
+    def checkColumnsRows(self, top, board):
+        top_remove_list = []
+        bottom_remove_list = []
+        for bottom in range(9):
+            if isinstance(board[bottom][top], str):
+                top_remove_list.append(board[bottom][top])
+            if isinstance(board[top][bottom], str):
+                bottom_remove_list.append(board[top][bottom])
 
-        for row in range(9):
-            if isinstance(board[row][col], set):
-                for r in remove_list:
-                    board[row][col].discard(r)
-                if len(board[row][col]) == 1:
-                    board[row][col] = next(iter(board[row][col]))
-
-
-    def checkRows(self, row, board):
-        remove_list = []
-        for k in range(9):
-            if isinstance(board[row][k], str):
-                remove_list.append(board[row][k])
-
-        for l in range(9):
-            if isinstance(board[row][l], set):
-                for r in remove_list:
-                    board[row][l].discard(r)
-                if len(board[row][l]) == 1:
-                    board[row][l] = next(iter(board[row][l]))
+        for bottom in range(9):
+            if isinstance(board[bottom][top], set):
+                for r in top_remove_list:
+                    board[bottom][top].discard(r)
+                if len(board[bottom][top]) == 1:
+                    board[bottom][top] = next(iter(board[bottom][top]))
+            if isinstance(board[top][bottom], set):
+                for r in bottom_remove_list:
+                    board[top][bottom].discard(r)
+                if len(board[top][bottom]) == 1:
+                    board[top][bottom] = next(iter(board[top][bottom]))
 
     def checkBoxes(self, left, right, top, bottom, board):
         # left and right are col, top and bottom are rows
@@ -72,13 +66,9 @@ class Solution(object):
         solved = False
 
         while not solved:
-            # search the columns
+            # search the columns and rows
             for j in range(9):
-                self.checkColumns(j, board)
-
-            # search the rows
-            for k in range(9):
-                self.checkRows(k, board)
+                self.checkColumnsRows(j, board)
 
             # search the grid
             top = 0
