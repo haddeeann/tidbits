@@ -15,21 +15,20 @@ class Solution(object):
             else:
                 test = build
             add = ''
+            count = 1
             while len(test) > 0:
-                count = 1
                 first = test[:1]
                 test = test[1:]
-                if test != '':
-                    while first == test[0]:
-                        count += 1
-                        test = test[1:]
-                        if test == '':
-                            break
+                while len(test) > 0 and first == test[0]:
+                    count += 1
+                    test = test[1:]
                 add += str(count) + first
-            build = add
             counter += 1
+            build = add
+        return build
 
 
 input = 4
 sol = Solution()
-sol.countAndSay(input)
+answer = sol.countAndSay(input)
+print(answer == "1211")
