@@ -1,14 +1,13 @@
 import turtle
+import time
 
-
-def draw_square(movement, color):
-    snake = turtle.Turtle()
-    if movement:
-        snake.up()
-        snake.backward(movement)
-        snake.down()
-    snake.color(color)
-    snake.shape("square")
+def draw_square(position):
+    square = turtle.Turtle()
+    square.penup()
+    square.goto(position)
+    square.color("white")
+    square.shape("square")
+    return square
 
 
 def draw_snake():
@@ -16,10 +15,24 @@ def draw_snake():
     screen.setup(width=600, height=600)
     screen.bgcolor("black")  # Set the background color here
     screen.title("Snake Game")
-    colors = ["red", "white", "blue"]
-    for x in range(3):
-        movement = x * 20
-        draw_square(movement, colors[x])
+    screen.tracer(0)
+
+    segments = []
+    starting_positions = [(0, 0), (-20, 0), (-40, 0)]
+    for position in starting_positions:
+        square = draw_square(position)
+        segments.append(square)
+
+    game = True
+    while game:
+        screen.update()
+        time.sleep(.1)
+        for seg in range(len(segments) - 1, 0, -1):
+            new_x = segments[seg - 1].xcor()
+            new_y = segments[seg - 1].ycor()
+            segments[seg].goto(new_x, new_y)
+        segments[0].forward(20)
+        segments[0].left(90)
 
     # Create the turtle and set its attributes
     screen.exitonclick()
