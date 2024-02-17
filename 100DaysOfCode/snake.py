@@ -21,6 +21,18 @@ class Snake:
         for seg in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg - 1].xcor()
             new_y = self.segments[seg - 1].ycor()
+            self.segments[seg].speed(1)
             self.segments[seg].goto(new_x, new_y)
         self.segments[0].forward(20)
-        self.segments[0].left(90)
+
+    def up(self):
+        self.segments[0].setheading(90)
+
+    def down(self):
+        self.segments[0].setheading(270)
+
+    def right(self):
+        self.segments[0].setheading(0)
+
+    def left(self):
+        self.segments[0].setheading(180)
