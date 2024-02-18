@@ -21,6 +21,7 @@ class Snake:
         square.goto(position)
         square.color("white")
         square.shape("square")
+        square.speed(1)
         return square
 
     def move(self):
