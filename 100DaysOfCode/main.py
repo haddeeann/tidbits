@@ -25,9 +25,14 @@ while game:
     time.sleep(.1)
     snake.move()
 
+    # detect collision with food
     if snake.head.distance(food) < 30:
         food.refresh()
         board.make_score()
+
+    if snake.head.xcor() > 280 or snake.head.ycor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() < -280:
+        game = False
+        board.game_over()
 
 # Create the turtle and set its attributes
 screen.exitonclick()
