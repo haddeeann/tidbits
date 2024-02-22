@@ -9,20 +9,25 @@ class Snake:
 
     def __init__(self):
         self.segments = []
-        starting_positions = [(0, 0), (-20, 0), (-40, 0)]
-        for position in starting_positions:
-            square = self.draw_square(position)
-            self.segments.append(square)
+        self.create_snake()
         self.head = self.segments[0]
 
-    def draw_square(self, position):
-        square = turtle.Turtle()
-        square.penup()
-        square.goto(position)
-        square.color("white")
-        square.shape("square")
-        square.speed(1)
-        return square
+    def create_snake(self):
+        starting_positions = [(0, 0), (-20, 0), (-40, 0)]
+        for position in starting_positions:
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        new_segment = turtle.Turtle()
+        new_segment.color("white")
+        new_segment.shape("square")
+        new_segment.penup()
+        new_segment.goto(position)
+        new_segment.speed(1)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
 
     def move(self):
         for seg in range(len(self.segments) - 1, 0, -1):
