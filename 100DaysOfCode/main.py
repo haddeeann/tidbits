@@ -30,14 +30,12 @@ while game:
         food.refresh()
         snake.extend()
         board.make_score()
-
-    if snake.head.xcor() > 280 or snake.head.ycor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() < -280:
+    edge = 290
+    if snake.head.xcor() > edge or snake.head.ycor() > edge or snake.head.xcor() < -edge or snake.head.ycor() < -edge:
         game = False
         board.game_over()
 
-    for segment in snake.segments:
-        if segment == snake.head:
-            continue
+    for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
             game = False
             board.game_over()
