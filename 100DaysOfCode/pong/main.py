@@ -3,15 +3,15 @@ from paddle import Paddle
 from ball import Ball
 
 screen = Screen()
-WIDTH = 1000
+WIDTH = 900
 HEIGHT = 600
 screen.setup(width=WIDTH, height=HEIGHT)
 screen.bgcolor("black")
 screen.title("Pong")
 screen.tracer(0)
 
-right = Paddle(425, 0)
-left = Paddle(-425, 0)
+right = Paddle((WIDTH / 2) - 75, 0)
+left = Paddle(-((WIDTH / 2) - 75), 0)
 
 ball = Ball(WIDTH, HEIGHT)
 

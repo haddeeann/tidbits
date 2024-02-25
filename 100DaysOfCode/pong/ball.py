@@ -8,7 +8,6 @@ class Ball(Turtle):
         self.height = height
         self.color('white')
         self.shape('circle')
-        self.penup()
         self.goto(0,0)
         self.setheading(170)
 
@@ -22,6 +21,7 @@ class Ball(Turtle):
         LEFT = 180
         DOWN = 270
         self.forward(3)
+        # RIGHT
         if int(self.xcor()) >= right_edge:
             if self.heading() == RIGHT:
                 # before heading RIGHT 0
@@ -33,7 +33,7 @@ class Ball(Turtle):
                     self.setheading(heading+UP)
                 elif heading > DOWN:
                     self.setheading(heading+LEFT)
-
+        # LEFT
         elif int(self.xcor()) <= left_edge:
             if self.heading() == LEFT:
                 # before heading LEFT 180
@@ -45,7 +45,7 @@ class Ball(Turtle):
                     self.setheading(heading-UP)
                 elif heading > LEFT:
                     self.setheading(heading+UP)
-
+        # UP
         elif int(self.ycor()) >= up_edge:
             if self.heading() == UP:
                 # before heading UP 90
@@ -57,6 +57,7 @@ class Ball(Turtle):
                     self.setheading(360-heading)
                 elif heading > UP:
                     self.setheading(UP+heading)
+        # DOWN
         elif int(self.ycor()) <= bottom_edge:
             if self.heading() == DOWN:
                 # before heading DOWN 270
