@@ -13,7 +13,7 @@ screen.tracer(0)
 right = Paddle(425, 0)
 left = Paddle(-425, 0)
 
-ball = Ball()
+ball = Ball(WIDTH, HEIGHT)
 
 screen.listen()
 screen.onkey(right.go_up, 'Up')
