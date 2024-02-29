@@ -15,9 +15,16 @@ class Ball(Turtle):
         self.y_move = 10
 
     def move(self):
+        # up bounce
         if self.ycor() > 280 or self.ycor() < -280:
             self.y_bounce()
-        if self.xcor() > 430 or self.xcor() < -430:
+        # right loses, end game restart
+        if self.xcor() > 430:
+            self.reset_position()
+            self.x_bounce()
+        # left loses, end game restart
+        if self.xcor() < -430:
+            self.reset_position()
             self.x_bounce()
         new_x = self.xcor() + self.x_move
         new_y = self.ycor() + self.y_move
@@ -28,3 +35,6 @@ class Ball(Turtle):
 
     def x_bounce(self):
         self.x_move *= -1
+
+    def reset_position(self):
+        self.goto(0,0)

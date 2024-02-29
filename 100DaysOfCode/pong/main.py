@@ -29,6 +29,7 @@ while game_on:
     screen.update()
     ball.move()
 
+    # paddle left and right
     if ball.distance(right) < 50 and ball.xcor() > 350:
         ball.x_bounce()
 
