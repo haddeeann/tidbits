@@ -12,5 +12,5 @@ bob = CarManager()
 while game_on:
     time.sleep(0.1)
     screen.update()
-    bob.move()
+    bob.batch_manager()
 
