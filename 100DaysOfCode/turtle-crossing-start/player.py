@@ -4,12 +4,29 @@ MOVE_DISTANCE = 10
 FINISH_LINE_Y = 280
 
 
-class Player:
+class Player(Turtle):
     def __init__(self):
-        player = Turtle()
-        player.penup()
-        player.shape('turtle')
-        player.goto(STARTING_POSITION)
-        player.color('green')
-        player.left(90)
-        player.shapesize(stretch_wid=1.5, stretch_len=1.5)
+        super().__init__()
+        self.penup()
+        self.shape('turtle')
+        self.goto(STARTING_POSITION)
+        self.color('green')
+        self.left(90)
+        self.shapesize(stretch_wid=1.5, stretch_len=1.5)
+        
+    def go_up(self):
+        new_y = self.ycor() + MOVE_DISTANCE
+        self.goto(self.xcor(), new_y)
+
+    def go_down(self):
+        new_y = self.ycor() - MOVE_DISTANCE
+        self.goto(self.xcor(), new_y)
+
+    def go_right(self):
+        new_x = self.xcor() + MOVE_DISTANCE
+        self.goto(new_x, self.ycor())
+
+    def go_left(self):
+        new_x = self.xcor() - MOVE_DISTANCE
+        self.goto(new_x, self.ycor())
+        
