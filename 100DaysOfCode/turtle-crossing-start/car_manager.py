@@ -17,7 +17,7 @@ class CarManager:
         self.move()
 
     def make_batch(self):
-        random_chance = random.randint(1, 32)
+        random_chance = random.randint(1, 48)
         if random_chance == 1:
             for car_num in range(6):
                 self.make_car(car_num)
@@ -29,8 +29,8 @@ class CarManager:
         car.shape('square')
         car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
-        x = random.randint(300, 400)
-        y = random.randint(-400, 400)
+        x = random.randint(300, 350)
+        y = random.randint(-200, 200)
         car.goto(x, y)
         self.cars.append(car)
 
