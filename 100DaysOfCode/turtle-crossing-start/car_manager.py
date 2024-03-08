@@ -21,7 +21,7 @@ class CarManager:
 
     def detect_collide(self, play):
         for car in self.cars:
-            if 30 > car.xcor() > -30 and abs(car.ycor() - play.ycor()) < 60:
+            if abs(car.xcor() - play.xcor()) < 60 and abs(car.ycor() - play.ycor()) < 30:
                 print(abs(car.ycor() - play.ycor()), car.color())
 
     def make_batch(self):
