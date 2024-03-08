@@ -16,13 +16,18 @@ class CarManager:
     def batch_manager(self, play):
         self.make_batch()
         self.remove_cars()
-        self.detect_collide(play)
-        self.move()
+        collision = self.detect_collide(play)
+        if not collision:
+            self.move()
+        else:
+            return 'game_over'
 
     def detect_collide(self, play):
         for car in self.cars:
-            if abs(car.xcor() - play.xcor()) < 60 and abs(car.ycor() - play.ycor()) < 30:
-                print(abs(car.ycor() - play.ycor()), car.color())
+            x_distance = abs(car.xcor() - play.xcor())
+            y_distance = abs(car.ycor() - play.ycor())
+            if x_distance < 35 and y_distance < 28:
+                return True
 
     def make_batch(self):
         random_chance = random.randint(1, 48)

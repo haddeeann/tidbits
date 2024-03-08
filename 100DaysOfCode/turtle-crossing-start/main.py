@@ -20,6 +20,10 @@ screen.onkey(play.go_left, "Left")
 while game_on:
     time.sleep(0.1)
     screen.update()
-    bob.batch_manager(play)
+    game_status = bob.batch_manager(play)
+    if game_status == 'game_over':
+        game_on = False
+
+screen.exitonclick()
 
 
