@@ -13,9 +13,16 @@ class CarManager:
         self.cars = []
         self.first_round = True
 
-    def batch_manager(self):
+    def batch_manager(self, play):
         self.make_batch()
+        self.remove_cars()
+        self.detect_collide(play)
         self.move()
+
+    def detect_collide(self, play):
+        for car in self.cars:
+            if 30 > car.xcor() > -30 and abs(car.ycor() - play.ycor()) < 60:
+                print(abs(car.ycor() - play.ycor()), car.color())
 
     def make_batch(self):
         random_chance = random.randint(1, 48)
@@ -23,6 +30,11 @@ class CarManager:
             for car_num in range(6):
                 self.make_car(car_num)
             self.first_round = False
+
+    def remove_cars(self):
+        for car in self.cars:
+            if car.xcor() < -325:
+                self.cars.remove(car)
 
     def make_car(self, car_num):
         color_index = car_num
@@ -38,5 +50,5 @@ class CarManager:
 
     def move(self):
         for car in self.cars:
-            car.backward(10)
+            car.backward(MOVE_INCREMENT)
 
