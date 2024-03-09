@@ -8,8 +8,9 @@ MOVE_INCREMENT = 10
 
 
 class CarManager:
-    def __init__(self):
+    def __init__(self, road_height):
         super().__init__()
+        self.car_lane = road_height - 10
         self.cars = []
         self.first_round = True
         top_y = 225
@@ -51,7 +52,7 @@ class CarManager:
         car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
         x = random.randint(400, 900)
-        y = random.randint(-220, 220)
+        y = random.randint(-self.car_lane, self.car_lane)
         car.goto(x, y)
         self.cars.append(car)
 

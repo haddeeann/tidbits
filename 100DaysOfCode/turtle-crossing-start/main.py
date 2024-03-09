@@ -10,13 +10,14 @@ screen.tracer(0)
 game_on = True
 road = Turtle()
 road.color("lightgray")
+road_height = 225
 rectCors = (
-    (-225,300), # bottom right
-    (225,300), #  top right
-    (225,-300), # top left
-    (-225,-300) # bottom left
+    (-road_height,300), # bottom right
+    (road_height,300), #  top right
+    (road_height,-300), # top left
+    (-road_height,-300) # bottom left
 )
-bob = CarManager()
+bob = CarManager(road_height)
 play = Player()
 
 screen.register_shape('rectangle',rectCors)
