@@ -45,7 +45,6 @@ def start_game():
 start_game()
 
 def restart_game():
-    print('restart game')
     scoreboard.clear_game()
     play.reset_position()
     screen.update()
