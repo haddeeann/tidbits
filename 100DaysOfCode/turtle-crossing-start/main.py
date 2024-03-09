@@ -19,6 +19,7 @@ rectCors = (
 )
 bob = CarManager(road_height)
 play = Player()
+scoreboard = Scoreboard()
 
 screen.register_shape('rectangle',rectCors)
 road.shape('rectangle')
@@ -31,7 +32,9 @@ screen.onkey(play.go_left, "Left")
 
 while game_on:
     time.sleep(0.1)
-    level = play.track_level(road_height)
+    level_up = play.track_level(road_height)
+    if level_up:
+        scoreboard.level_up()
     screen.update()
     game_status = bob.batch_manager(play)
     if game_status == 'game_over':

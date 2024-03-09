@@ -32,4 +32,5 @@ class Player(Turtle):
     def track_level(self, road_height):
         if self.ycor() > road_height + 20:
             self.goto(STARTING_POSITION)
+            return True
         
