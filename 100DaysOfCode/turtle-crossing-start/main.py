@@ -36,7 +36,7 @@ while game_on:
     if level_up:
         scoreboard.level_up()
     screen.update()
-    game_status = bob.batch_manager(play)
+    game_status = bob.batch_manager(play, level_up)
     if game_status == 'game_over':
         game_on = False
 

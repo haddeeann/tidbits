@@ -4,7 +4,7 @@ import time
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
-MOVE_INCREMENT = 10
+MOVE_INCREMENT = 1
 
 
 class CarManager:
@@ -15,8 +15,11 @@ class CarManager:
         self.first_round = True
         top_y = 225
         bottom_y = -225
+        self.move_distance = STARTING_MOVE_DISTANCE
 
-    def batch_manager(self, play):
+    def batch_manager(self, play, level_up):
+        if level_up:
+            self.move_distance += MOVE_INCREMENT
         self.make_batch()
         self.remove_cars()
         collision = self.detect_collide(play)
@@ -51,12 +54,12 @@ class CarManager:
         car.shape('square')
         car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
-        x = random.randint(400, 900)
+        x = random.randint(325, 625)
         y = random.randint(-self.car_lane, self.car_lane)
         car.goto(x, y)
         self.cars.append(car)
 
     def move(self):
         for car in self.cars:
-            car.backward(MOVE_INCREMENT)
+            car.backward(self.move_distance)
 
