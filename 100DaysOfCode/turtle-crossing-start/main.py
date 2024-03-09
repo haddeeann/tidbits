@@ -1,5 +1,5 @@
 import time
-from turtle import Screen
+from turtle import Screen, Turtle
 from player import Player
 from car_manager import CarManager
 from scoreboard import Scoreboard
@@ -8,9 +8,20 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 game_on = True
-
+road = Turtle()
+road.color("lightgray")
+rectCors = (
+    (-225,300), # bottom right
+    (225,300), #  top right
+    (225,-300), # top left
+    (-225,-300) # bottom left
+)
 bob = CarManager()
 play = Player()
+
+screen.register_shape('rectangle',rectCors)
+road.shape('rectangle')
+
 screen.listen()
 screen.onkey(play.go_up, "Up")
 screen.onkey(play.go_down, "Down")

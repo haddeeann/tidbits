@@ -12,6 +12,8 @@ class CarManager:
         super().__init__()
         self.cars = []
         self.first_round = True
+        top_y = 225
+        bottom_y = -225
 
     def batch_manager(self, play):
         self.make_batch()
@@ -49,7 +51,7 @@ class CarManager:
         car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
         x = random.randint(400, 900)
-        y = random.randint(-225, 225)
+        y = random.randint(-220, 220)
         car.goto(x, y)
         self.cars.append(car)
 
