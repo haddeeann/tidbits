@@ -33,4 +33,7 @@ class Player(Turtle):
         if self.ycor() > road_height + 20:
             self.goto(STARTING_POSITION)
             return True
+
+    def reset_position(self):
+        self.goto(STARTING_POSITION)
         
