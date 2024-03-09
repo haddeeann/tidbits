@@ -1,7 +1,6 @@
 from turtle import Turtle
 STARTING_POSITION = (0, -270)
 MOVE_DISTANCE = 10
-FINISH_LINE_Y = 280
 
 
 class Player(Turtle):
@@ -29,4 +28,8 @@ class Player(Turtle):
     def go_left(self):
         new_x = self.xcor() - MOVE_DISTANCE
         self.goto(new_x, self.ycor())
+
+    def track_level(self, road_height):
+        if self.ycor() > road_height + 20:
+            self.goto(STARTING_POSITION)
         

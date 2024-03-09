@@ -31,6 +31,7 @@ screen.onkey(play.go_left, "Left")
 
 while game_on:
     time.sleep(0.1)
+    level = play.track_level(road_height)
     screen.update()
     game_status = bob.batch_manager(play)
     if game_status == 'game_over':
