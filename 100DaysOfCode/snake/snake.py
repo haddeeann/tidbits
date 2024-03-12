@@ -23,7 +23,7 @@ class Snake:
         new_segment.shape("square")
         new_segment.penup()
         new_segment.goto(position)
-        new_segment.speed(1)
+        new_segment.speed('slowest')
         self.segments.append(new_segment)
 
     def extend(self):
@@ -52,3 +52,11 @@ class Snake:
     def left(self):
         if self.head.heading() != self.RIGHT:
             self.segments[0].setheading(self.LEFT)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1500, 1500)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+

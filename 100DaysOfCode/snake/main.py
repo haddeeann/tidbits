@@ -22,7 +22,7 @@ screen.onkey(snake.left, "Left")
 game = True
 while game:
     screen.update()
-    time.sleep(.1)
+    time.sleep(.2)
     snake.move()
 
     # detect collision with food
@@ -32,13 +32,13 @@ while game:
         board.make_score()
     edge = 290
     if snake.head.xcor() > edge or snake.head.ycor() > edge or snake.head.xcor() < -edge or snake.head.ycor() < -edge:
-        game = False
-        board.game_over()
+        board.reset()
+        snake.reset()
 
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game = False
-            board.game_over()
+            board.reset()
+            snake.reset()
 
 # Create the turtle and set its attributes
 screen.exitonclick()
