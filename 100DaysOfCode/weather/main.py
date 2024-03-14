@@ -11,3 +11,13 @@ monday = data[data.day == 'Monday']
 monday_temp = monday.temp[0]
 monday_temp_F = c_to_f(monday_temp)
 print(monday_temp_F)
+
+scores = {
+    "person": ["Janet", "matt"],
+    "score": [56, 25],
+    "day": ['monday', 'tuesday']
+}
+
+new_data = pandas.DataFrame(scores)
+print(new_data)
+new_data.to_csv('new_data.csv')
