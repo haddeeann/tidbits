@@ -7,10 +7,10 @@ def c_to_f(f):
 
 
 data = pandas.read_csv('./weather_data.csv')
+print(data)
 monday = data[data.day == 'Monday']
 monday_temp = monday.temp[0]
 monday_temp_F = c_to_f(monday_temp)
-print(monday_temp_F)
 
 scores = {
     "person": ["Janet", "matt"],
