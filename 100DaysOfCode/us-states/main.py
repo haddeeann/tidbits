@@ -14,9 +14,11 @@ data = pandas.read_csv(file)
 all_states = data.state.to_list()
 
 turtle.shape(image)
-state_len = 50
-while state_len > 0:
+print(len(all_states))
+while len(all_states) > 0:
     answer = screen.textinput(title='Guess the state', prompt='what is another state?')
+    if answer == "Exit":
+        break
     if answer.lower() in (state.lower() for state in all_states):
         row = data[data.state == answer]
         if not row.empty:
@@ -28,4 +30,9 @@ while state_len > 0:
             t.penup()
             t.goto(x, y)
             t.write(row.state.item(), align=ALIGN, font=FONT)
+            all_states.remove(row.state.item())
+print(all_states)
+file = './missed_states.csv'
+data = pandas.DataFrame(all_states)
+data.to_csv(file)
 turtle.mainloop()
