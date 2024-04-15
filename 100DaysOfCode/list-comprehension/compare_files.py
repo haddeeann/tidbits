@@ -1,8 +1,8 @@
 with open('./numbers1.txt', 'r') as f:
-    file1 = f.read().split('\n')
+    file1 = f.readlines()
 
 with open('./numbers2.txt', 'r') as f:
-    file2 = f.read().split('\n')
+    file2 = f.readlines()
 
 numbers1 = [int(n) for n in file1]
 numbers2 = [int(n) for n in file2]
