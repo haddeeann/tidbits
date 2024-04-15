@@ -1,7 +1,5 @@
 sentence = input()
 
-words = sentence.split(' ')
-
-count = {word:len(word) for word in words}
+count = {word:len(word) for word in sentence.split(' ')}
 
 print(count)
