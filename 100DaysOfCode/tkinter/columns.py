@@ -6,6 +6,7 @@ from tkinter import *
 window = Tk()
 window.title("Widget Examples")
 window.minsize(width=500, height=500)
+window.config(padx=100, pady=100)
 
 # Labels
 label = Label(text="This is old text")
