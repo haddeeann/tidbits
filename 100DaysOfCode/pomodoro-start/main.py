@@ -7,26 +7,45 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
+# work minutes 25
 WORK_MIN = 25
+# break minutes 5
 SHORT_BREAK_MIN = 5
+# long break minutes 20
 LONG_BREAK_MIN = 20
+reps = 1
+max_reps = 8
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    count_down(WORK_MIN * 60)
+    global reps
+    if reps == max_reps:
+        label.config(text=f"BREAK {reps}", fg=RED)
+        count_down(LONG_BREAK_MIN * 60)
+    elif reps % 2 != 0:
+        label.config(text=f"WORK {reps}", fg=GREEN)
+        # minutes * 60
+        count_down(WORK_MIN * 60)
+    else:
+        label.config(text=f"BREAK {reps}", fg=PINK)
+        count_down(SHORT_BREAK_MIN * 60)
+    reps += 1
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
-    minutes = math.floor(count/60)
+    minutes = math.floor(count / 60)
     seconds = count % 60
     time_text = f"{minutes:02d}:{seconds:02d}"
     canvas.itemconfig(timer_text, text=time_text)
+
     if count > 0:
         window.after(1000, count_down, count - 1)
+    elif reps <= max_reps:
+        start_timer()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -40,7 +59,7 @@ label.grid(column=1, row=0)
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 tomato_img = PhotoImage(file="tomato.png")
 canvas.create_image(100, 112, image=tomato_img)
-timer_text = canvas.create_text(100, 130, text=f"{WORK_MIN}:00", fill='white', font=(FONT_NAME, 35, 'bold'))
+timer_text = canvas.create_text(100, 130, text=f"{WORK_MIN:02d}:00", fill='white', font=(FONT_NAME, 35, 'bold'))
 
 canvas.grid(column=1, row=1)
 
