@@ -16,9 +16,18 @@ LONG_BREAK_MIN = 20
 reps = 0
 max_reps = 7
 reps_check = ''
+timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    global timer
+    global reps_check
+    reps_check = ''
+    check.config(text=reps_check)
+    window.after_cancel(timer)
+    label.config(text='Timer')
+    canvas.itemconfig(timer_text, text=f"{WORK_MIN:02d}:00")
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -27,15 +36,15 @@ def start_timer():
     work = False
     if reps == max_reps:
         label.config(text=f"BREAK", fg=RED)
-        count_down(LONG_BREAK_MIN)
+        count_down(LONG_BREAK_MIN * 60)
     elif reps % 2 == 0:
         label.config(text=f"WORK {round(reps/2) + 1}", fg=GREEN)
         # minutes * 60
-        count_down(WORK_MIN)
+        count_down(WORK_MIN * 60)
         work = True
     else:
         label.config(text=f"BREAK", fg=PINK)
-        count_down(SHORT_BREAK_MIN)
+        count_down(SHORT_BREAK_MIN * 60)
     if not work:
         reps_check += '✔'
         check.config(text=reps_check)
@@ -44,13 +53,14 @@ def start_timer():
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
+    global timer
     minutes = math.floor(count / 60)
     seconds = count % 60
     time_text = f"{minutes:02d}:{seconds:02d}"
     canvas.itemconfig(timer_text, text=time_text)
 
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        timer = window.after(1000, count_down, count - 1)
     elif reps <= max_reps:
         start_timer()
 
@@ -73,7 +83,7 @@ canvas.grid(column=1, row=1)
 start = Button(text='Start', bg=YELLOW, command=start_timer)
 start.grid(column=0, row=2)
 
-reset = Button(text='Reset', bg=YELLOW)
+reset = Button(text='Reset', bg=YELLOW, command=reset_timer)
 reset.grid(column=2, row=2)
 
 check = Label(bg=YELLOW, fg=GREEN)
