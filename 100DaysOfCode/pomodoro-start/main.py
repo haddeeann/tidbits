@@ -23,6 +23,8 @@ timer = None
 def reset_timer():
     global timer
     global reps_check
+    global reps
+    reps = 0
     reps_check = ''
     check.config(text=reps_check)
     window.after_cancel(timer)
