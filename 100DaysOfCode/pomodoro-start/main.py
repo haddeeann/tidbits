@@ -13,8 +13,9 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 # long break minutes 20
 LONG_BREAK_MIN = 20
-reps = 1
-max_reps = 8
+reps = 0
+max_reps = 7
+reps_check = ''
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
@@ -22,16 +23,22 @@ max_reps = 8
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
     global reps
+    global reps_check
+    work = False
     if reps == max_reps:
-        label.config(text=f"BREAK {reps}", fg=RED)
-        count_down(LONG_BREAK_MIN * 60)
-    elif reps % 2 != 0:
-        label.config(text=f"WORK {reps}", fg=GREEN)
+        label.config(text=f"BREAK", fg=RED)
+        count_down(LONG_BREAK_MIN)
+    elif reps % 2 == 0:
+        label.config(text=f"WORK {round(reps/2) + 1}", fg=GREEN)
         # minutes * 60
-        count_down(WORK_MIN * 60)
+        count_down(WORK_MIN)
+        work = True
     else:
-        label.config(text=f"BREAK {reps}", fg=PINK)
-        count_down(SHORT_BREAK_MIN * 60)
+        label.config(text=f"BREAK", fg=PINK)
+        count_down(SHORT_BREAK_MIN)
+    if not work:
+        reps_check += '✔'
+        check.config(text=reps_check)
     reps += 1
 
 
@@ -69,7 +76,7 @@ start.grid(column=0, row=2)
 reset = Button(text='Reset', bg=YELLOW)
 reset.grid(column=2, row=2)
 
-check = Label(text='✔', bg=YELLOW, fg=GREEN)
+check = Label(bg=YELLOW, fg=GREEN)
 check.grid(column=1, row=3)
 
 window.mainloop()
