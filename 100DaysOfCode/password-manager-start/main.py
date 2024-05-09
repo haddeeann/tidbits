@@ -6,9 +6,19 @@ GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
 
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def add_password():
+    website = website_input.get()
+    email = email_input.get()
+    password = password_input.get()
+    f = open('data.txt', 'a')
+    f.write(f'{website} | {email} | {password}\n')
+    f.close()
+
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -27,6 +37,7 @@ website_label.grid(column=0, row=1)
 
 website_input = Entry(width=38, justify='left')
 website_input.grid(column=1, row=1, columnspan=2)
+website_input.focus()
 
 # email input/label
 email_label = Label(text='Email/Username')
@@ -34,6 +45,7 @@ email_label.grid(column=0, row=2)
 
 email_input = Entry(width=38, justify='left')
 email_input.grid(column=1, row=2, columnspan=2)
+email_input.insert(0, 'pattee13@gmail.com')
 
 # password input/label
 password_label = Label(text='Password')
@@ -49,11 +61,6 @@ def generate_password():
 
 button = Button(text='Generate Password', command=generate_password)
 button.grid(column=2, row=3)
-
-
-def add_password():
-    pass
-
 
 button = Button(text='Add', command=add_password, width=36)
 button.grid(column=1, row=4, columnspan=2)
