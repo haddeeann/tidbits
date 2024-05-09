@@ -13,10 +13,12 @@ FONT_NAME = "Courier"
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title('Password Manager')
-window.config(padx=20, pady=20, bg=PINK)
+window.config(padx=20, pady=20)
 
-canvas = Canvas(width=200, height=200, bg=PINK, highlightthickness=0)
-padlock_img = PhotoImage(file='logo.png')
-canvas.create_image(200, 200, image=padlock_img)
+canvas = Canvas(width=200, height=224, highlightthickness=0)
+tomato_img = PhotoImage(file="logo.png")
+canvas.create_image(100, 100, image=tomato_img)
+
+canvas.grid(column=1, row=1)
 
 window.mainloop()
