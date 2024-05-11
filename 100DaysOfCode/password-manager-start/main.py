@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -14,9 +15,20 @@ def add_password():
     website = website_input.get()
     email = email_input.get()
     password = password_input.get()
-    f = open('data.txt', 'a')
-    f.write(f'{website} | {email} | {password}\n')
-    f.close()
+
+    if not website or not email or not password:
+        messagebox.showinfo(message="Please enter text in website, email, and password!")
+    else:
+        isok = messagebox.askokcancel(title=website, message=f"Website: {website}\n"
+                                                             f"Email: {email}\n"
+                                                             f"Password: {password}.\n"
+                                                             f"Is it ok to save?")
+        if isok:
+            with open('data.txt', 'a') as f:
+                f.write(f'{website} | {email} | {password}\n')
+                website_input.delete(0, END)
+                email_input.delete(0, END)
+                password_input.delete(0, END)
 
 
 
