@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import random_password
+import pyperclip
 
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -14,7 +15,7 @@ FONT_NAME = "Courier"
 def generate_password():
     generated_password = random_password.generate()
     password_input.insert(0, generated_password)
-    print(generated_password)
+    pyperclip.copy(generated_password)
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
