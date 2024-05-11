@@ -13,6 +13,7 @@ FONT_NAME = "Courier"
 
 def generate_password():
     generated_password = random_password.generate()
+    password_input.insert(0, generated_password)
     print(generated_password)
 
 
