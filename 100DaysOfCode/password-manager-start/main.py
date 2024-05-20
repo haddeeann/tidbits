@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random_password
 import pyperclip
+import json
 
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -29,13 +30,19 @@ def add_password():
     else:
         isok = messagebox.askokcancel(title=website, message=f"Website: {website}\n"
                                                              f"Email: {email}\n"
-                                                             f"Password: {user_password}.\n"
+                                                             f"Password: {user_password}\n"
                                                              f"Is it ok to save?")
         if isok:
-            with open('data.txt', 'a') as f:
-                f.write(f'{website} | {email} | {user_password}\n')
+            with open('data.json', 'w') as file:
+                entry = {
+                    website: {
+                        'email': email,
+                        'password': user_password
+                    }
+                }
+                json.dump(entry, file, indent=4)
+
                 website_input.delete(0, END)
-                email_input.delete(0, END)
                 password_input.delete(0, END)
 
 
