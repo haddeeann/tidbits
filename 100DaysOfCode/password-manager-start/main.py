@@ -3,6 +3,7 @@ from tkinter import messagebox
 import random_password
 import pyperclip
 import json
+from json import JSONDecodeError
 
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -33,15 +34,18 @@ def add_password():
                                                              f"Password: {user_password}\n"
                                                              f"Is it ok to save?")
         if isok:
-            with open('data.json', 'w') as file:
-                entry = {
-                    website: {
-                        'email': email,
-                        'password': user_password
-                    }
-                }
-                json.dump(entry, file, indent=4)
+            with open('data.json', 'r') as file:
+                try:
+                    entries = json.load(file)
+                except JSONDecodeError:
+                    entries = {}
+            entries[website] = {
+                'email': email,
+                'password': user_password
+            }
 
+            with open('data.json', 'w') as file:
+                json.dump(entries, file, indent=4)
                 website_input.delete(0, END)
                 password_input.delete(0, END)
 
