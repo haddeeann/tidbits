@@ -39,10 +39,12 @@ def add_password():
                     entries = json.load(file)
                 except JSONDecodeError:
                     entries = {}
-            entries[website] = {
-                'email': email,
-                'password': user_password
-            }
+            entries.update({
+                website: {
+                    'email': email,
+                    'password': user_password
+                }
+            })
 
             with open('data.json', 'w') as file:
                 json.dump(entries, file, indent=4)
