@@ -34,7 +34,7 @@ def add_password():
                                                              f"Password: {user_password}\n"
                                                              f"Is it ok to save?")
         if isok:
-            with open('data.json', 'r') as file:
+            with open('data.json', 'w+') as file:
                 try:
                     entries = json.load(file)
                 except JSONDecodeError:
