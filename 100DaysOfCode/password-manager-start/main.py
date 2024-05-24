@@ -11,6 +11,22 @@ GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
 
+# ------------------------------ SEARCH PASSWORD ---------------------------------- #
+def search_password():
+    with open('data.json', 'r') as file:
+        try:
+            entries = json.load(file)
+        except JSONDecoderError:
+            print('Not a properly formatted json')
+        else:
+            website = website_input.get()
+            if website in entries:
+                combo = entries[website]
+                email = combo['email']
+                password = combo['password']
+                messagebox.showinfo(message=f"Email: {email}\n"
+                                            f"Password: {password}")
+
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -34,20 +50,19 @@ def add_password():
                                                              f"Password: {user_password}\n"
                                                              f"Is it ok to save?")
         if isok:
-            with open('data.json', 'w+') as file:
+            with open('data.json', 'r') as read_file:
                 try:
-                    entries = json.load(file)
-                except JSONDecodeError:
-                    entries = {}
-            entries.update({
-                website: {
-                    'email': email,
-                    'password': user_password
-                }
-            })
+                    entries = json.load(read_file)
+                except JSONDecodeError as e:
+                    {}
 
-            with open('data.json', 'w') as file:
-                json.dump(entries, file, indent=4)
+            entries[website] = {
+                'email': email,
+                'password': user_password
+            }
+
+            with open('data.json', 'w') as write_file:
+                json.dump(entries, write_file, indent=4)
                 website_input.delete(0, END)
                 password_input.delete(0, END)
 
@@ -67,9 +82,12 @@ canvas.grid(column=1, row=0)
 website_label = Label(text='Website')
 website_label.grid(column=0, row=1)
 
-website_input = Entry(width=38, justify='left')
-website_input.grid(column=1, row=1, columnspan=2)
+website_input = Entry(width=21, justify='left')
+website_input.grid(column=1, row=1)
 website_input.focus()
+
+button = Button(width=12, text='Search', command=search_password)
+button.grid(column=2, row=1)
 
 # email input/label
 email_label = Label(text='Email/Username')
