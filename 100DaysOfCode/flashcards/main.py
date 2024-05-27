@@ -8,11 +8,21 @@ window.config(bg=bg_color, padx=50, pady=50)
 card_front = Canvas(width=850, height=550, highlightthickness=0, bg=bg_color)
 card_front_img = PhotoImage(file='./images/card_front.png')
 card_front.create_image(425, 275, image=card_front_img)
-card_front.grid(column=0, row=0)
+card_front.grid(column=0, row=0, rowspan=3)
 
 forward = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
 forward_img = PhotoImage(file='./images/next_small.png')
 forward.create_image(50, 50, image=forward_img)
 forward.grid(column=1, row=0)
+
+flip = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
+flip_img = PhotoImage(file='./images/flip.png')
+flip.create_image(50, 50, image=flip_img)
+flip.grid(column=1, row=1)
+
+trash = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
+trash_img = PhotoImage(file='./images/trash.png')
+trash.create_image(50, 50, image=trash_img)
+trash.grid(column=1, row=2)
 
 window.mainloop()
