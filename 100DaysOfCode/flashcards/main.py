@@ -24,19 +24,23 @@ card_canvas.create_image(425, 275, image=card_front_img)
 card_canvas.create_text(425, 250, text=first_spanish, fill='black', font=(FONT_NAME, 45, 'bold'))
 card_canvas.grid(column=0, row=0, rowspan=3)
 
-forward = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
+forward_canvas = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
 forward_img = PhotoImage(file='./images/next_small.png')
-forward.create_image(50, 50, image=forward_img)
-forward.grid(column=1, row=0)
+forward_canvas.create_image(50, 50, image=forward_img)
+forward_canvas.grid(column=1, row=0)
 
-flip = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
+
+def flip_card():
+    print('flip happiness')
+
+
 flip_img = PhotoImage(file='./images/flip.png')
-flip.create_image(50, 50, image=flip_img)
-flip.grid(column=1, row=1)
+flip_button = Button(width=100, height=100, image=flip_img, bg=bg_color, command=flip_card)
+flip_button.grid(column=1, row=1)
 
-trash = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
+trash_canvas = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
 trash_img = PhotoImage(file='./images/trash.png')
-trash.create_image(50, 50, image=trash_img)
-trash.grid(column=1, row=2)
+trash_canvas.create_image(50, 50, image=trash_img)
+trash_canvas.grid(column=1, row=2)
 
 window.mainloop()
