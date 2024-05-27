@@ -71,6 +71,7 @@ def add_password():
 window = Tk()
 window.title('Password Manager')
 window.config(padx=20, pady=20)
+col_width = 21
 
 canvas = Canvas(width=200, height=224, highlightthickness=0)
 tomato_img = PhotoImage(file='logo.png')
@@ -82,11 +83,12 @@ canvas.grid(column=1, row=0)
 website_label = Label(text='Website')
 website_label.grid(column=0, row=1)
 
+# middle column input size
 website_input = Entry(width=21, justify='left')
 website_input.grid(column=1, row=1)
 website_input.focus()
 
-button = Button(width=12, text='Search', command=search_password)
+button = Button(width=col_width, text='Search', command=search_password)
 button.grid(column=2, row=1)
 
 # email input/label
@@ -101,7 +103,8 @@ email_input.insert(0, 'pattee13@gmail.com')
 password_label = Label(text='Password')
 password_label.grid(column=0, row=3)
 
-password_input = Entry(width=21, justify='left')
+# middle column input size
+password_input = Entry(width=col_width, justify='left')
 password_input.grid(column=1, row=3)
 
 button = Button(text='Generate Password', command=generate_password)
