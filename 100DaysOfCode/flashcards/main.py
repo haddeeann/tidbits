@@ -1,5 +1,9 @@
 from tkinter import *
+import pandas
 
+df = pandas.read_csv('./data/french_words.csv')
+french_dict = df.to_dict('records')
+print(french_dict)
 window = Tk()
 window.title('Flashcards')
 bg_color = 'lightblue'
@@ -24,10 +28,15 @@ card_canvas.create_image(425, 275, image=card_front_img)
 card_canvas.create_text(425, 250, text=first_spanish, fill='black', font=(FONT_NAME, 45, 'bold'))
 card_canvas.grid(column=0, row=0, rowspan=3)
 
-forward_canvas = Canvas(width=100, height=100, highlightthickness=0, bg=bg_color)
-forward_img = PhotoImage(file='./images/next_small.png')
-forward_canvas.create_image(50, 50, image=forward_img)
-forward_canvas.grid(column=1, row=0)
+def next_card():
+    print('next happiness')
+
+img = PhotoImage(file='./images/next_small.png')
+Button(
+    window,
+    image=img,
+    command=next_card
+).grid(column=1, row=0)
 
 
 def flip_card():
