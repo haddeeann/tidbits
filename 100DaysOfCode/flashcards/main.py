@@ -15,21 +15,18 @@ pairs = {
     "feliz": "happy"
 }
 
-first_spanish = ''
 first_english = ''
-for index, spanish in enumerate(pairs):
-    print(index, spanish, pairs[spanish])
-    first_spanish = spanish
-    first_english = pairs[spanish]
+for translation in french_dict:
+    print(translation["French"], ': ', translation["English"])
 
 card_canvas = Canvas(width=850, height=550, highlightthickness=0, bg=bg_color)
 card_front_img = PhotoImage(file='./images/card_front.png')
 card_canvas.create_image(425, 275, image=card_front_img)
-card_canvas.create_text(425, 250, text=first_spanish, fill='black', font=(FONT_NAME, 45, 'bold'))
+text_id = card_canvas.create_text(425, 250, text=french_dict[0]["French"], fill='black', font=(FONT_NAME, 45, 'bold'))
 card_canvas.grid(column=0, row=0, rowspan=3)
 
 def next_card():
-    print('next happiness')
+    print('next card')
 
 img = PhotoImage(file='./images/next_small.png')
 Button(
@@ -40,7 +37,9 @@ Button(
 
 
 def flip_card():
-    print('flip happiness')
+    global text_id
+    card_canvas.delete(text_id)
+    card_canvas.create_text(425, 250, text=french_dict[0]["English"], fill='black', font=(FONT_NAME, 45, 'bold'))
 
 
 flip_img = PhotoImage(file='./images/flip.png')
