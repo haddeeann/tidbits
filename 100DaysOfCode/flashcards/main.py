@@ -3,7 +3,6 @@ import pandas
 
 df = pandas.read_csv('./data/french_words.csv')
 french_dict = df.to_dict('records')
-print(french_dict)
 window = Tk()
 window.title('Flashcards')
 bg_color = 'lightblue'
@@ -16,8 +15,10 @@ pairs = {
 }
 
 first_english = ''
-for translation in french_dict:
-    print(translation["French"], ': ', translation["English"])
+# for translation in french_dict:
+#     print(translation["French"], ': ', translation["English"])
+
+language = "French"
 
 card_canvas = Canvas(width=850, height=550, highlightthickness=0, bg=bg_color)
 card_front_img = PhotoImage(file='./images/card_front.png')
@@ -38,8 +39,16 @@ Button(
 
 def flip_card():
     global text_id
-    card_canvas.delete(text_id)
-    card_canvas.create_text(425, 250, text=french_dict[0]["English"], fill='black', font=(FONT_NAME, 45, 'bold'))
+    global language
+    if language == "French":
+        card_canvas.delete(text_id)
+        text_id = card_canvas.create_text(425, 250, text=french_dict[0]["English"], fill='black', font=(FONT_NAME, 45, 'bold'))
+        language = "English"
+    elif language == "English":
+        card_canvas.delete(text_id)
+        text_id = card_canvas.create_text(425, 250, text=french_dict[0]["French"], fill='black', font=(FONT_NAME, 45, 'bold'))
+        language = "French"
+
 
 
 flip_img = PhotoImage(file='./images/flip.png')
