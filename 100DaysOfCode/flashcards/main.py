@@ -19,15 +19,22 @@ first_english = ''
 #     print(translation["French"], ': ', translation["English"])
 
 language = "French"
-
+card_number = 0
 card_canvas = Canvas(width=850, height=550, highlightthickness=0, bg=bg_color)
 card_front_img = PhotoImage(file='./images/card_front.png')
 card_canvas.create_image(425, 275, image=card_front_img)
-text_id = card_canvas.create_text(425, 250, text=french_dict[0]["French"], fill='black', font=(FONT_NAME, 45, 'bold'))
+text_id = card_canvas.create_text(425, 250, text=french_dict[card_number][language], fill='black', font=(FONT_NAME, 45, 'bold'))
 card_canvas.grid(column=0, row=0, rowspan=3)
 
 def next_card():
-    print('next card')
+    global text_id
+    global language
+    global card_number
+    card_number += 1
+    card_canvas.delete(text_id)
+    text_id = card_canvas.create_text(425, 250, text=french_dict[card_number][language], fill='black',
+                                      font=(FONT_NAME, 45, 'bold'))
+
 
 img = PhotoImage(file='./images/next_small.png')
 Button(
@@ -40,13 +47,14 @@ Button(
 def flip_card():
     global text_id
     global language
+    global card_number
     if language == "French":
         card_canvas.delete(text_id)
-        text_id = card_canvas.create_text(425, 250, text=french_dict[0]["English"], fill='black', font=(FONT_NAME, 45, 'bold'))
+        text_id = card_canvas.create_text(425, 250, text=french_dict[card_number]["English"], fill='black', font=(FONT_NAME, 45, 'bold'))
         language = "English"
     elif language == "English":
         card_canvas.delete(text_id)
-        text_id = card_canvas.create_text(425, 250, text=french_dict[0]["French"], fill='black', font=(FONT_NAME, 45, 'bold'))
+        text_id = card_canvas.create_text(425, 250, text=french_dict[card_number]["French"], fill='black', font=(FONT_NAME, 45, 'bold'))
         language = "French"
 
 
