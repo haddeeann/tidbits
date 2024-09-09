@@ -3,21 +3,15 @@ import pandas
 
 df = pandas.read_csv('./data/french_words.csv')
 french_dict = df.to_dict('records')
+len_french_dict = len(french_dict)
+print(len_french_dict)
 window = Tk()
 window.title('Flashcards')
 bg_color = 'lightblue'
 window.config(bg=bg_color, padx=50, pady=50)
 FONT_NAME = "Courier"
 
-pairs = {
-    "hola": "hi",
-    "feliz": "happy"
-}
-
 first_english = ''
-# for translation in french_dict:
-#     print(translation["French"], ': ', translation["English"])
-
 language = "French"
 card_number = 0
 card_canvas = Canvas(width=850, height=550, highlightthickness=0, bg=bg_color)
@@ -30,7 +24,22 @@ def next_card():
     global text_id
     global language
     global card_number
-    card_number += 1
+    if card_number < len_french_dict:
+        card_number += 1
+    else:
+        card_number = 0
+    card_canvas.delete(text_id)
+    text_id = card_canvas.create_text(425, 250, text=french_dict[card_number][language], fill='black',
+                                      font=(FONT_NAME, 45, 'bold'))
+
+def previous_card():
+    global text_id
+    global language
+    global card_number
+    if card_number == 0:
+        card_number = len_french_dict - 1
+    else:
+        card_number -= 1
     card_canvas.delete(text_id)
     text_id = card_canvas.create_text(425, 250, text=french_dict[card_number][language], fill='black',
                                       font=(FONT_NAME, 45, 'bold'))
