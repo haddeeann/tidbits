@@ -17,14 +17,8 @@ class Solution(object):
         l2_list = l2
         carry = 0
 
-        while l1_list is not None or l2_list is not None:
-            # find the add in
-            if l1_list is not None and l2_list is not None:
-                addSum = l1_list.val + l2_list.val + carry
-            elif l1_list is not None:
-                addSum = l1_list.val + carry
-            elif l2_list is not None:
-                addSum = l2_list.val + carry
+        while l1_list and l2_list:
+            addSum = l1_list.val + l2_list.val + carry
 
             if addSum > 9:
                 strSum = str(addSum)
