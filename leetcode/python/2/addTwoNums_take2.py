@@ -11,60 +11,22 @@ class Solution(object):
         :type l2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        l1_curr = l1
-        l2_curr = l2
-        l3 = ListNode()
-        loop = l3
+        dummy = ListNode()
+        current = dummy
         carry = 0
-        while l1_curr and l2_curr:
-            add = l1_curr.val + l2_curr.val + carry
-            if add > 9:
-                carry = 1
-                add_sum = add % 10
-            else:
-                carry = 0
-                add_sum = add
+        while l1 or l2 or carry:
+            l1_val = l1.val if l1 else 0
+            l2_val = l2.val if l2 else 0
+            total = l1_val + l2_val + carry
+            carry = total // 10
+            base = total % 10
+            current.next = ListNode(base)
+            current = current.next
 
-            loop.val = add_sum
-            if l1_curr.next or l2_curr.next:
-                loop.next = ListNode()
-                loop = loop.next
-            l1_curr = l1_curr.next
-            l2_curr = l2_curr.next
-        while l1_curr:
-            add = l1_curr.val + carry
-            if add > 9:
-                carry = 1
-                add_sum = add % 10
-            else:
-                carry = 0
-                add_sum = add
-            loop.val = add_sum
-            if l1_curr.next:
-                loop.next = ListNode()
-                loop = loop.next
-            l1_curr = l1_curr.next
-        while l2_curr:
-            add = l2_curr.val + carry
-            if add > 9:
-                carry = 1
-                add_sum = add % 10
-            else:
-                carry = 0
-                add_sum = add
-            loop.val = add_sum
-            if l2_curr.next:
-                loop.next = ListNode()
-                loop = loop.next
-            l2_curr = l2_curr.next
-        if carry == 1:
-            loop.next = ListNode()
-            loop.val = 1
-        return l3
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
-
-
-
+        return dummy.next
 
 def make_linked_list(new_list):
     head = ListNode(new_list[0])
@@ -82,8 +44,8 @@ def print_linked_list(node):
         print(current.val)
         current = current.next
 
-arr_1 = [9,2,3,4,1]
-arr_2 = [1,3,4,5]
+arr_1 = [9,9,9,9,9,9,9]
+arr_2 = [9,9,9,9]
 ll_1 = make_linked_list(arr_1)
 ll_2 = make_linked_list(arr_2)
 solution = Solution()
