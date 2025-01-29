@@ -2,6 +2,18 @@ from long_pally2 import Solution
 
 tests = [
     {
+        'input': 'aacabdkacaa',
+        'answer': 'aca'
+    },
+    {
+        'input': 'abcbe',
+        'answer': 'bcb'
+    },
+    {
+        'input': 'abcba',
+        'answer': 'abcba'
+    },
+    {
         'input': 'ccc',
         'answer': 'ccc'
     },
